@@ -1,0 +1,411 @@
+body {
+    background-image: url(../IMG/fondo.jpg);
+    margin: auto;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    background-size: cover;
+    background-position-y: 90px;
+}
+
+header {
+    background-color: red;
+    width: 100%;
+    height: 90px;
+    display: flex;
+
+}
+
+h3 {
+    color: white;
+
+
+
+}
+
+.contenedor {
+    margin: 8px;
+    display: flow-root;
+}
+
+#logo {
+    width: 90px;
+    height: 90px;
+
+
+
+}
+
+.contenedorcabecera {
+    height: 90px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: red;
+}
+
+.divlogo {
+    width: 90px;
+    height: 90px;
+    display: flex;
+
+
+}
+
+.textencabezado {
+    height: 90px;
+    width: 677px;
+    margin-left: 40px;
+
+    align-items: center;
+    text-align: center;
+    display: flex;
+
+}
+
+.div1cabecera {
+    height: 90px;
+    width: 160px;
+    text-align: center;
+    display: flex;
+
+    /* padding-top: 40px;*/
+
+}
+
+#preguntasfrecuentes {
+
+    box-sizing: border-box;
+
+    width: 350px;
+    height: 69px;
+    margin: auto;
+
+    background: red;
+    border-radius: 5px;
+    display: flex;
+}
+
+#textofrecuentes {
+    margin: auto;
+}
+
+#docenteex {
+    box-sizing: border-box;
+
+    width: 400px;
+    height: 39px;
+    left: 24px;
+    top: 303px;
+
+    background: rgba(222, 222, 222, 0.9);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#docentein {
+    box-sizing: border-box;
+
+    width: 143px;
+    height: 39px;
+    left: 24px;
+    top: 303px;
+
+    background: rgba(185, 30, 30, 0.9);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#textdocentein {
+
+    left: 37px;
+    top: 308px;
+    margin: auto;
+}
+
+#textdocenteex {
+    width: 234px;
+    height: 19px;
+    left: 197px;
+    top: 313px;
+    margin: auto;
+}
+
+#instalacionesex {
+    box-sizing: border-box;
+
+    width: 643px;
+    height: 39px;
+    left: 24px;
+    top: 399px;
+
+    background: rgba(222, 222, 222, 0.9);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#instalacionesin {
+    box-sizing: border-box;
+
+    width: 167px;
+    height: 39px;
+    left: 24px;
+    top: 399px;
+
+    background: rgba(185, 30, 30, 0.9);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+
+}
+
+#textinstalacionesin {
+    left: 24px;
+    top: 399px;
+    margin: auto;
+}
+
+#textinstalacionesex {
+    width: 441px;
+    height: 19px;
+    left: 197px;
+    top: 409px;
+    margin: auto;
+}
+
+#materiaex {
+    box-sizing: border-box;
+
+    width: 650px;
+    height: 39px;
+    left: 24px;
+    top: 399px;
+
+    background: rgba(222, 222, 222, 0.9);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#materiain {
+    box-sizing: border-box;
+
+    width: 143px;
+    height: 39px;
+    left: 24px;
+    top: 399px;
+
+    background: rgba(185, 30, 30, 0.9);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}
+
+#textmateriain {
+    left: 20px;
+    top: 399px;
+    margin: auto;
+}
+
+#textmateriaex {
+    width: 441px;
+    height: 19px;
+    left: 197px;
+    top: 409px;
+    margin: auto;
+}
+
+#equipoex {
+    box-sizing: border-box;
+
+    width: 700px;
+    height: 39px;
+    left: 24px;
+    top: 399px;
+
+    background: rgba(222, 222, 222, 0.9);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#equipoin {
+    box-sizing: border-box;
+
+    width: 143px;
+    height: 39px;
+    left: 24px;
+    top: 399px;
+
+    background: rgba(185, 30, 30, 0.9);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}
+
+#textequipoin {
+    left: 20px;
+    top: 399px;
+    margin: auto;
+}
+
+#textequipoex {
+    height: 19px;
+    left: 197px;
+
+    margin: auto;
+}
+
+#boton {
+    box-sizing: border-box;
+
+
+    width: 143px;
+    height: 62px;
+    left: 24px;
+    top: 682px;
+
+    background: rgba(251, 14, 14, 0.9);
+    border-radius: 10px;
+}
+
+/****************************************AQUI ES EL MENU DESPLEGABLE******************************************************/
+
+
+.sidenav {
+    height: 100%;
+
+    width: 0;
+
+    position: fixed;
+
+    z-index: 1;
+
+    top: 0;
+    right: 0;
+    background-color: #111;
+
+    overflow-x: hidden;
+
+    padding-top: 60px;
+
+    transition: 0.5s;
+
+}
+
+/* Los enlaces del menú de navegación */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s
+}
+
+/* Cuando pase el mouse sobre los enlaces de navegación, cambie su color */
+.sidenav a:hover,
+.offcanvas a:focus {
+    color: #f1f1f1;
+}
+
+/* Posiciona y aplica estilo al botón de cerrar (esquina superior derecha) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Estilo del contenido de la página: use esto si desea empujar el contenido de 
+la página hacia la derecha cuando abre la navegación lateral 
+
+JAIDER AQUI NO FUNCIONA POR QUE ESTA CONFIGURADO COMO SI SALIERA DE LA IZQUIERDA NO DE AL DERECHA
+ES PS SOLO CAMBIAR EL LADO PERO NO SE NO LO VEO NECESARIO*/
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+    overflow: hidden;
+    width: 100%;
+}
+
+
+
+/* Agrega un color de fondo ROJO a la navegación superior */
+.topnav {
+    background-color: red;
+    overflow: hidden;
+    width: 90px;
+    height: 90px;
+    align-items: center;
+}
+
+/* Dale estilo a los enlaces dentro de la barra de navegación */
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 30px 30px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Cambiar el color de los enlaces al pasar el mouse */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+    padding: auto;
+    align-self: center;
+}
+
+/* Agrega un color al enlace activo/actual */
+/*.topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+}*/
+
+/* En pantallas más pequeñas, donde la altura es inferior a 450 px, cambie el estilo de la navegación lateral (menos relleno y un tamaño de fuente más pequeño) */
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+a svg {
+    transition: all .5s ease;
+
+    &:hover {
+        transform: rotate(180deg);
+    }
+}
+
+#ico {
+    display: none;
+}
+
+.menu {
+    background: #000;
+    display: none;
+    padding: 5px;
+    width: 320px;
+    border-radius: 5px;
+
+    /*#transition: all 0.5s ease;*/
+
+}

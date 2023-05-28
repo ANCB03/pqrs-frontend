@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/styleIndex.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <div class="divlogo">
+            <img src="img/logo.png" alt="" id="logo">
+        </div>
+        <div class="textencabezado">
+            <li>
+                <a href="index.html">
+                    <h2>SISTEMA PQRS <br> ing. de sistemas</h2>
+                </a>
+            </li>
+        </div>
+        <div id="sideNavigation" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="index.html">INICIO</a>
+            <a href="preguntasFrecuentes.html">PQRS</a>
+            <a href="login.html">INICIAR SESION</a>
+            <a href="registrarse.html">REGISTRARSE</a>
+        </div>
+        <nav class="topnav">
+            <a href="#" onclick="openNav()">
+                <svg width="30" height="30" id="icoOpen">
+                    <path d="M0,5 30,5" stroke="#000" stroke-width="5" />
+                    <path d="M0,14 30,14" stroke="#000" stroke-width="5" />
+                    <path d="M0,23 30,23" stroke="#000" stroke-width="5" />
+                </svg>
+            </a>
+        </nav>
+    </header>
+    <main id="Main">
+        <section id="Section1">
+            <article id="A1">
+                <div>
+                    <h3>Bienvenido/a</h3>
+                    <h5>Al sistemas de PQRS</h5>
+                </div>
+            </article>
+            <br>
+            <br>
+
+            <article id="A1">
+                <div>
+                    <p>Aqui podras realizar todas las preguntas, quejas, reclamos o solicitudes
+                        que tengas con respecto a los docentes, materias, instalaciones y equipos
+                        relacionados al programa de ingenieria de sistemas de la Universidad
+                        Franscisco de Paula Santander
+                    </p>
+                </div>
+            </article>
+        </section>
+        <aside id="aside">
+            <div id="a-div1">
+                <div id="a-img">
+                </div>
+                <div id="a-info">
+                    <div class="div-info">
+                        <h3>Camilo Perez</h3>
+                        <h5>Administrador</h5>
+                    </div>
+
+                </div>
+            </div>
+            <div id="btns">
+                <button class="btn-menu"
+                    onclick="window.location.href = `/Vistas/admin/categoriasP.html`;">Preguntas</button>
+                <button class="btn-menu"
+                    onclick="window.location.href = `/Vistas/admin/categoriasQ.html`;">Quejas</button>
+                <button class="btn-menu"
+                    onclick="window.location.href = `/Vistas/admin/categoriasR.html`;">Reclamos</button>
+                <button class="btn-menu"
+                    onclick="window.location.href = `/Vistas/admin/categoriasS.html`;">Solicitudes</button>
+                <button class="btn-menu">Cerrar sesion</button>
+            </div>
+        </aside>
+    </main>
+    <script src="JS/animationindex2.js"></script>
+    <script src='js/menu.js'></script>
+    <script src='js/scripts.js'></script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/NewPQR.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/styles.css'>
+
+
+</head>
+
+
+<body>
+    <header>
+        <div class="divlogo">
+            <img src="img/logo.png" alt="" id="logo">
+        </div>
+        <div class="textencabezado">
+            <li>
+                <a href="index.html">
+                    <h2>SISTEMA PQRS <br> ing. de sistemas</h2>
+                </a>
+            </li>
+        </div>
+        <div id="sideNavigation" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="index.html">INICIO</a>
+            <a href="preguntasFrecuentes.html">PQRS</a>
+            <a href="index.html">CERRAR SESION</a>
+        </div>
+        <nav class="topnav">
+            <a href="#" onclick="openNav()">
+                <svg width="30" height="30" id="icoOpen">
+                    <path d="M0,5 30,5" stroke="#000" stroke-width="5" />
+                    <path d="M0,14 30,14" stroke="#000" stroke-width="5" />
+                    <path d="M0,23 30,23" stroke="#000" stroke-width="5" />
+                </svg>
+            </a>
+        </nav>
+    </header>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="form-container">
+
+        <label for="asunto-input">Asunto</label>
+        <textarea id="asunto-input" class="asunto-input" placeholder="Ingresa El Asunto"></textarea>
+
+        <label for="text-input">Redacte Su Solicitud</label>
+        <textarea id="text-input" class="text-input" placeholder="Ingrese la descripcion"></textarea>
+
+        <label for="combo-box">Seleccione una categoría</label>
+        <select id="combo-box-Categoria" class="combo-box">
+            <option value="1">Peticiones</option>
+            <option value="2">Quejas</option>
+            <option value="3">Reclamos</option>
+            <option value="4">Sugerencias</option>
+        </select>
+
+        <label for="combo-box">Dirigida a</label>
+        <select id="combo-box-Area" class="combo-box">
+            <option value="1">Sistemas</option>
+            <option value="2">Docentes</option>
+            <option value="3">Administrativa</option>
+        </select>
+
+        <label for="file">Adjunte si hay evidencias</label>
+        <form action="upload.php" method="POST" enctype="multipart/form-data">
+            <input type="file" name="archivo">
+        </form>
+
+        <button id="btn">Enviar</button>
+    </div>
+
+
+    <script src='js/menu.js'></script>
+    <script src='js/scripts.js'></script>
+
+</body>
+
+</html>
