@@ -1,26 +1,45 @@
 const formeElement = document.getElementById("formm");
+
 formeElement.addEventListener("submit", (event)=> {
     event.preventDefault();
 
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
+    let email = document.getElementById("email");
+    let password = document.getElementById("password");
 
-    let login = {email:email, password:password};
+    let login = {email:email.value, password:password.value};
     let loginJSON = JSON.stringify(login);
-    
-    fetch(`http://localhost:8080/login`, {
-        method: "POST",
-        body: loginJSON
-    })
-    .then(Response => Response.json())
-    .then (data => {
-        // Obtener el token JWT de la respuesta de la API
-        const token = data.token;
 
-        // Almacenar el token JWT en el almacenamiento local
-        localStorage.setItem('jwtToken', token);
-        token!=null? window.location.href = 'index.html': false
-        console.log(data) 
-    })
+        fetch(`http://localhost:8080/login`, {
+            method: "POST",
+            body: loginJSON,
+        })
+        .then(response => response.json())
+        .then(data => {
+
+            if(data.token != null) {
+                const token = data.token;
+
+                localStorage.removeItem('anonimo')
+                localStorage.setItem('jwtToken', token);
+                localStorage.setItem('email', data.username)
+                localStorage.setItem('rol', data.rol)
+                localStorage.setItem('isAuthenticated', true);
+
+                if(data.rol == "ROLE_ADMIN"){
+                    window.location.href = 'admin.html'
+                } else if(data.rol == "ROLE_STUDENT") {
+                    window.location.href = 'index.html'
+                }
+                console.log(data)
+            } else {
+                email.value = "";
+                password.value = "";
+
+                const err = document.getElementById("error");
+                err.innerHTML = data.message;
+            }
+        })
+    
+    
 })
 

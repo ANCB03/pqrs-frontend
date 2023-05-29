@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>PQRS | Nueva</title>
+    <title>PQRS | Quejas</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' href='css/newPQR.css'>
     <link rel='stylesheet' href='css/styles.css'>
@@ -17,31 +17,18 @@
 
     <div class="form-container" style="margin-top: 7rem;">
 
-        <label for="asunto-input">Asunto</label>
-        <textarea id="asunto-input" class="asunto-input" placeholder="Ingresa el asunto"></textarea>
+        <label for="asunto-input">Nombre de usuario</label>
+        <textarea id="asunto-input" class="asunto-input" placeholder="Ingresa el nombre de usuario"></textarea>
 
         <label for="text-input">Redacte Su Solicitud</label>
         <textarea id="text-input" class="text-input" placeholder="Ingrese la descripcion"></textarea>
-
-        <label for="combo-box">Seleccione una categoría</label>
-        <select id="combo-box-Categoria" class="combo-box">
-        </select>
-
-        <label for="combo-box">Dirigida a</label>
-        <select id="combo-box-Area" class="combo-box">
-        </select>
-
-        <label for="file">Adjunte si hay evidencias</label>
-        <form action="upload.php" method="POST" enctype="multipart/form-data">
-            <input type="file" name="archivo">
-        </form>
 
         <button id="btn">Enviar</button>
     </div>
 
 
     <script src='js/menu.js'></script>
-    <script src='js/pqrs.js'></script>
+    <script src='js/quejas.js'></script>
 
 </body>
 

@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="CSS/StyleLogin.css">
-     
-    
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Login</title>
+    <link rel="stylesheet" href="css/styleLogin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>PQRS | Login</title>
 </head>
+
 <body>
     <form id="formm">
-        <h1 class="title">login</h1>
+        <h1 class="title">Login</h1>
         <label for="email">
             <i class="fa-solid fa-user"></i>
             <input placeholder="Correo electronico" type="text" id="email">
         </label>
         <label for="password">
             <i class="fa-solid fa-lock"></i>
-            <input placeholder="password" type="password" id="password">
-        </label> 
+            <input placeholder="Password" type="password" id="password">
+        </label>
         <a href="#" class="link">¿Olvidaste tu contraseña?</a>
-                        <a href="preguntasFrecuentes.html">
-                    <div id="Div_PF">
-                    
-                        Preguntas Frecuentes
-                    </div>
-                </a>
-                <button id="login">Login</button>
-        
+        <a href="preguntasFrecuentes.html">
+            <div id="Div_PF">
+                Preguntas Frecuentes
+            </div>
+        </a> <br>
+        <button id="login">Login</button>
+        <br>
+        <div id="error"></div>
+
     </form>
     <script src="JS/scripyLogin.js"></script>
 </body>
+
 </html>
