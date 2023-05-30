@@ -1,7 +1,6 @@
-// Obtener referencia a la tabla y el cuerpo de la tabla
+
 var tbody = document.querySelector('tbody')
-const token = localStorage.getItem("jwtToken");
-// Realizar solicitud Fetch para obtener los datos
+
 fetch('http://localhost:8080/usuario/all', {
     method: "GET",
     headers: {
@@ -10,7 +9,6 @@ fetch('http://localhost:8080/usuario/all', {
 })
     .then(response => response.json())
     .then(data => {
-        // Recorrer los datos obtenidos y agregar filas a la tabla
         console.log(data)
 
         for (let i = 0; i < data.usuario.length; i++) {
@@ -61,48 +59,37 @@ function editar(id_usuario) {
 };
 
 function abrirModalEditarUsuario(idUsuario) {
-    // Aquí puedes realizar una solicitud Fetch o acceder a tus datos de usuario como desees
-    // En este ejemplo, utilizaremos datos de ejemplo
 
     fetch(`http://localhost:8080/usuario/${idUsuario}`, {
-    method: "GET",
-    headers: {
-        Authorization: `Bearer ${token}`
-    }
-})
-.then(response => response.json())
-.then(data => {
-    document.getElementById('cod').value = data.usuario.id_usuario;
-    document.getElementById('nom').value = data.usuario.nombre;
-    document.getElementById('ape').value = data.usuario.apellido;
-    document.getElementById('ema').value = data.usuario.email;
-    document.getElementById('tel').value = data.usuario.telefono;
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('cod').value = data.usuario.id_usuario;
+            document.getElementById('nom').value = data.usuario.nombre;
+            document.getElementById('ape').value = data.usuario.apellido;
+            document.getElementById('ema').value = data.usuario.email;
+            document.getElementById('tel').value = data.usuario.telefono;
 
-    var boton = document.getElementById('enviar');
-    boton.onclick = function () {
-        actualizarInfo(data.usuario.id_usuario);
-    };
-}).catch(error => {
-    console.error('Error al obtener los datos:', error);
-});
-    // Simulación de datos del usuario
-    var usuario = {
-      id: idUsuario,
-      nombre: 'John',
-      apellido: 'Doe',
-      email: 'john.doe@example.com',
-      telefono: '123456789'
-    };
+            var boton = document.getElementById('enviar');
+            boton.onclick = function () {
+                actualizarInfo(data.usuario.id_usuario);
+            };
 
-    // Cargar los datos del usuario en el formulario
-    
-  }
+        }).catch(error => {
+            console.error('Error al obtener los datos:', error);
+        });
 
-  var base64 = "";
+}
+
+var base64 = "";
 var nombreImagen = "";
 var extImagen = "";
 
-function actualizarInfo(id_usuario){
+function actualizarInfo(id_usuario) {
     const cod = document.getElementById('cod').value;
     const nom = document.getElementById('nom').value;
     const ape = document.getElementById('ape').value;
@@ -155,10 +142,7 @@ function actualizarInfo(id_usuario){
         });
 }
 
-// Obtener referencia al elemento <input type="file">
 var input = document.getElementById("foto");
-
-// Agregar evento de cambio al elemento
 input.addEventListener("change", function () {
 
     var archivo = input.files[0];
