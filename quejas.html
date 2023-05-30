@@ -9,6 +9,8 @@
     <link rel='stylesheet' href='css/newPQR.css'>
     <link rel='stylesheet' href='css/styles.css'>
     <script src="header-template.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 
@@ -18,13 +20,13 @@
     <main id="Main">
         <div class="form-container" style="margin-top: 7rem;">
 
-            <label for="asunto-input">Nombre de usuario</label>
-            <textarea id="asunto-input" class="asunto-input" placeholder="Ingresa el nombre de usuario"></textarea>
+            <label for="nombre_usuario">Nombre de usuario</label>
+            <textarea id="nombre_usuario" class="asunto-input" placeholder="Ingresa el nombre de usuario"></textarea>
     
-            <label for="text-input">Redacte Su Solicitud</label>
-            <textarea id="text-input" class="text-input" placeholder="Ingrese la descripcion"></textarea>
+            <label for="solicitud">Redacte Su Solicitud</label>
+            <textarea id="solicitud" class="text-input" placeholder="Ingrese la descripcion"></textarea>
     
-            <button id="btn">Enviar</button>
+            <button id="btn" onclick="generarQueja()">Enviar</button>
         </div>
     </main>
     

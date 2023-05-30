@@ -1,5 +1,3 @@
-const token = localStorage.getItem("jwtToken");
-
 const id_usuario = localStorage.getItem("id_usuario");
 
 let respuestas = [];
@@ -13,7 +11,11 @@ const miPerfil = () => {
 
 
     if (localStorage.getItem("email") != null) {
-        fetch("http://localhost:8080/usuario/encontrar/" + localStorage.getItem("email"))
+        fetch("http://localhost:8080/usuario/encontrar/" + localStorage.getItem("email"), {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
             .then((response) => response.json())
             .then((data) => {
 
@@ -130,14 +132,13 @@ const cargarDataRespuestas = () => {
 
     for (let i = 0; i < respuestas.length; i++) {
         console.log(respuestas[i])
-    
+
         var fila = document.createElement("tr");
 
         var id_respuesta = document.createElement("td");
         id_respuesta.textContent = respuestas[i].id_respuesta;
         fila.appendChild(id_respuesta);
 
-        console.log(respuestas[i].radicado)
         var radicado = document.createElement("td");
         radicado.textContent = respuestas[i].pqrs.titulo;
         fila.appendChild(radicado);
@@ -150,16 +151,39 @@ const cargarDataRespuestas = () => {
         calificacion.textContent = respuestas[i].calificacion;
         fila.appendChild(calificacion);
 
-        var anexo = document.createElement("button");
-        anexo.textContent = respuestas[i].anexo;
-        fila.appendChild(anexo);
+        var anexo = document.createElement("a");
+
+        anexo.href = base + respuestas[i].anexo;
+
+        anexo.innerHTML = '<i style="color:black" class="fas fa-file-download"></i>';
         
+        anexo.style.display = "flex";
+        anexo.style.justifyContent = "center";
+        anexo.style.alignItems = "center";
+        anexo.style.textDecoration = "none";
+
+        fila.appendChild(anexo);
+
         tabla.appendChild(fila);
     }
 }
 
+const limpiarTabla = () => {
+    var tbody = document.getElementById("filas");
+
+    while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
+    }
+}
+
+var modal = document.getElementById("verRespuestasModal");
+
+modal.addEventListener("hidden.bs.modal", function () {
+    limpiarTabla();
+});
+
 document.addEventListener("DOMContentLoaded", function () {
     miPerfil();
     cargarDataRespuestas();
-    
+
 });

@@ -1,4 +1,3 @@
-const token = localStorage.getItem("jwtToken");
 
 const listarCategorias = () => {
   fetch("http://localhost:8080/tipo/all")
@@ -46,7 +45,6 @@ const enviarData = () => {
   let area = document.getElementById("combo-box-Categoria").value;
   let tipo = document.getElementById("combo-box-Area").value;
 
-  const token = localStorage.getItem("jwtToken");
   const pqrs = {
     titulo: titulo,
     descripcion: descripcion,

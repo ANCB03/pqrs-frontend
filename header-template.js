@@ -1,5 +1,7 @@
 
 const isAuthenticated = localStorage.getItem('isAuthenticated');
+const token = localStorage.getItem("jwtToken");
+
 
 const base = "https://pqrs-docs.s3.amazonaws.com/documents/"
 
@@ -59,10 +61,14 @@ const email = localStorage.getItem("email");
 
 
 const obtenerUsuarioLogueado = () => {
-
+    console.log(email)
 
     if (email != null) {
-        fetch("http://localhost:8080/usuario/encontrar/" + email)
+        fetch("http://localhost:8080/usuario/encontrar/" + email, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
             .then((response) => response.json())
             .then((data) => {
                 const imgElement = document.getElementById('imagen');
@@ -71,17 +77,23 @@ const obtenerUsuarioLogueado = () => {
 
                 quejas.style.display = 'none'
 
-
+                imgElement.style.display = 'block'
+                nombre.style.display = 'block'
                 imgElement.src = base + data.usuario.imagen;
                 nombre.innerText = data.usuario.nombre.split(" ")[0] + " " + data.usuario.apellido.split(" ")[0];
 
-                localStorage.setItem("id_usuario",data.usuario.id_usuario)
+                localStorage.setItem("id_usuario", data.usuario.id_usuario)
+
+            })
 
 
-
-            });
     } else if (localStorage.getItem("anonimo") != null) {
         console.log("soy anonimo")
+        const imgElement = document.getElementById('imagen');
+        const nombre = document.getElementById('nombre');
+
+        imgElement.style.display = 'none'
+        nombre.style.display = 'none'
 
     } else {
         localStorage.setItem("anonimo", 1);
@@ -101,9 +113,8 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "admin.html"
     }
 
-    obtenerUsuarioLogueado();
-
-
     document.getElementById("header").innerHTML = headerTemplate;
+
+    obtenerUsuarioLogueado();
 });
 
