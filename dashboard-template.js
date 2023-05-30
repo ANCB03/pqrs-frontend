@@ -100,17 +100,15 @@ let navbarTemplate = `
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="nombre">Douglas McGee</span>
                     <img class="img-profile rounded-circle" id="perfil" src="">
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="#">
-                        <div id="cont-text" style="display: flex; ">
-                            <i class="fas fa-user fa-sm fa-fw mr-2 mt-1 text-gray-400" ></i>
-                            <p id='nombre' color: black'></p>
-                        </div>
+                        <i class="fas fa-user fa-sm fa-fw mr-2 mt-1 text-gray-400" ></i>
+                        Mi Perfil
                         
                     </a>
 
@@ -139,24 +137,23 @@ let sidebarTemplate = `
         </div>
         <div class="sidebar-brand-text mx-3">PQRS UFPS</div>
     </a>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
-
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="admin.html">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
-    </li>
+    
 
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <!-- Heading -->
     <div class="sidebar-heading">
-        Interface
+        Herramientas
     </div>
+
+    <li class="nav-item">
+        <a class="nav-link" href="admin.html">
+        <i class="fas fa-file-pdf"></i>
+            <span>Listado de Usuarios </span></a>
+    </li>
+
+    <hr class="sidebar-divider d-none d-md-block">
+
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
@@ -174,23 +171,13 @@ let sidebarTemplate = `
         </div>
     </li>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Addons
-    </div>
+    
 
     <!-- Nav Item - Pages Collapse Menu -->
 
 
 
 
-    <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
     

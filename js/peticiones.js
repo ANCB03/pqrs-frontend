@@ -1,9 +1,7 @@
 
-
-
 function llenarTablaPendiente(){
     var tbody = document.getElementById('cuerpo1')
-    fetch('http://localhost:8080/historialestados/filtro/2/2', {
+    fetch('http://localhost:8080/historialestados/filtro/2/1', {
     method: "GET",
     headers: {
         Authorization: `Bearer ${token}`
@@ -58,7 +56,7 @@ function llenarTablaPendiente(){
 
 function llenarTablaRespondidas(){
     var tbody = document.getElementById('cuerpo2')
-    fetch('http://localhost:8080/historialestados/filtro/1/2', {
+    fetch('http://localhost:8080/historialestados/filtro/1/1', {
     method: "GET",
     headers: {
         Authorization: `Bearer ${token}`
@@ -112,7 +110,7 @@ function llenarTablaRespondidas(){
 
 function llenarTablaRechazadas(){
     var tbody = document.getElementById('cuerpo3')
-    fetch('http://localhost:8080/historialestados/filtro/3/2', {
+    fetch('http://localhost:8080/historialestados/filtro/3/1', {
     method: "GET",
     headers: {
         Authorization: `Bearer ${token}`

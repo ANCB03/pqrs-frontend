@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script src="js/reportes.js"></script>
+
+
 </head>
 
 <body id="page-top">
@@ -48,8 +51,16 @@
                 <!-- CONTENIDO -->
                 <div class="container-fluid">
 
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Peticiones Pendientes</h1>
+                    <div class="row">
+                        <div class="col-6 d-flex justify-content-start">
+                            <h1 class="h3 mb-0 text-gray-800">Peticiones Pendientes</h1>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end pr-4" >
+                            <button type="button" class="btn btn-outline-danger" onclick="generarReporte(1)">
+                                <i class="fas fa-file-pdf pr-2"></i>
+                                Reporte PDF
+                            </button>
+                        </div>
                     </div>
 
                     <table class="table">
