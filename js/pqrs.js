@@ -30,46 +30,44 @@ const listarAreas = () => {
     });
 };
 
-document.addEventListener("DOMContentLoaded", function () {
-  obtenerUsuarioLogueado();
-  listarCategorias();
-  listarAreas();
-});
-
 
 var base64 = "";
 var nombreAnexo = "";
 var extAnexo = "";
 
-const enviarData = (event) => {
-  event.preventDefault();
+const enviarData = () => {
 
   let titulo = document.getElementById("titulo").value;
   let descripcion = document.getElementById("descripcion").value;
   let anexo = base64;
 
-  let usuario = "usuario logueado";
-  let area = document.getElementById("area").value;
-  let tipo = document.getElementById("tipo").value;
+  let id_usuario = localStorage.getItem("id_usuario");
 
-
+  let area = document.getElementById("combo-box-Categoria").value;
+  let tipo = document.getElementById("combo-box-Area").value;
 
   const token = localStorage.getItem("jwtToken");
   const pqrs = {
     titulo: titulo,
     descripcion: descripcion,
     anexo: anexo,
-    usuario: usuario,
+    usuario: {
+      id_usuario: id_usuario,
+    },
     prioridad: null,
-    area: area,
-    tipo: tipo,
+    area: {
+      id_area : area,
+    },
+    tipo: {
+      id_tipo: tipo,
+    }
   };
-  
+
   let pqrsJSON = JSON.stringify(pqrs);
   console.log("data")
-  console.log(pqrsJSON);
+  console.log(pqrs);
 
-  fetch("http://localhost:8080/pqrs/guardar", {
+  fetch("http://localhost:8080/radicado/guardar", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -80,16 +78,26 @@ const enviarData = (event) => {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+
+      Swal.fire({
+        title: "Información",
+        text: data.message,
+        icon: "success",
+        confirmButtonText: "Aceptar"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = 'preguntasFrecuentes.html'
+        }
+      })
     })
     .catch((error) => {
       console.error("Error al intentar guardar:", error);
     });
+
+  
 };
 
-// Obtener referencia al elemento <input type="file">
-var input = document.getElementById("imagen");
-
-// Agregar evento de cambio al elemento
+var input = document.getElementById("file");
 input.addEventListener("change", function () {
 
   var archivo = input.files[0];
@@ -107,3 +115,9 @@ input.addEventListener("change", function () {
   lector.readAsDataURL(archivo);
 });
 
+
+document.addEventListener("DOMContentLoaded", function () {
+  obtenerUsuarioLogueado();
+  listarCategorias();
+  listarAreas();
+});
