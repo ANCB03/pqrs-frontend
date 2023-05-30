@@ -29,7 +29,15 @@
 
     <div id="wrapper">
 
-        <div id="sidebar"></div>
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <div id="sidebar"></div>
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
 
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -41,10 +49,10 @@
                 <div class="container-fluid">
 
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Listado Usuarios</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Peticiones Pendientes</h1>
                     </div>
 
-                    <table class="table" id="algo">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>Titulo</th>
@@ -54,8 +62,124 @@
                                 <th>Acción</th>
                             </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody id="cuerpo1"></tbody>
                     </table>
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Peticiones Respondidas</h1>
+                    </div>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Titulo</th>
+                                <th>Tipo</th>
+                                <th>Usuario</th>
+                                <th>Área</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpo2"></tbody>
+                    </table>
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Peticiones Rechazadas</h1>
+                    </div>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Titulo</th>
+                                <th>Tipo</th>
+                                <th>Usuario</th>
+                                <th>Área</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpo3"></tbody>
+                    </table>
+
+
+                    <!-- Modal responder-->
+                    <div class="modal fade" id="responderModal" tabindex="-1" aria-labelledby="editarInfoModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="editarInfoModalLabel">Información de la petición
+                                    </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="mb-3">
+                                                <label for="cod" class="form-label">Id radicado</label>
+                                                <input class="form-control" readonly type="text" 
+                                                    id="radicado">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="mb-3">
+                                                <label for="cod" class="form-label">Nombre usuario</label>
+                                                <input class="form-control" readonly type="text" 
+                                                    id="user">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="mb-3">
+                                                <label for="cod" class="form-label">Área</label>
+                                                <input class="form-control" readonly type="text" 
+                                                    id="area">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="mb-3">
+                                                <label for="cod" class="form-label">Prioridad</label>
+                                                <input class="form-control" readonly type="text" 
+                                                    id="prio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ema" class="form-label">Título</label>
+                                        <input class="form-control" type="text" readonly id="titulo">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ema" class="form-label">Descripción</label>
+                                        <input class="form-control" type="text" readonly id="desc">
+                                    </div>
+                                    <div id="bot">
+                                        <a href="" id="abtn" style="text-decoration: none;">Descargar Anexo<i style="color:black" class="fas fa-file-download"></i></a>
+                                    </div>
+                                    <hr>
+                                    <div class="mb-3">
+                                        <label for="ema" class="form-label">Respuesta</label>
+                                        <input class="form-control" type="text" placeholder="Ingresa la respuesta" id="resp">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ema" class="form-label">Calificación</label>
+                                        <input class="form-control" type="number" placeholder="Ingresa la calificación" id="cal">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ema" class="form-label">Anexo</label>
+                                        <input class="form-control" type="file"  id="anexo">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-dark" id="enviar"
+                                        onclick="actualizarInfo();">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 

@@ -14,7 +14,8 @@ fetch('http://localhost:8080/usuario/all', {
         for (let i = 0; i < data.usuario.length; i++) {
             var fila = document.createElement('tr');
 
-            var idColumna = document.createElement('td');
+            if(data.usuario[i].rol.id_rol != 1){
+                var idColumna = document.createElement('td');
             idColumna.textContent = data.usuario[i].id_usuario;
             fila.appendChild(idColumna);
 
@@ -46,6 +47,8 @@ fetch('http://localhost:8080/usuario/all', {
 
             accionColumna.appendChild(boton);
             fila.appendChild(accionColumna);
+            }
+            
 
             tbody.appendChild(fila);
         }
