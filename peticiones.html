@@ -192,6 +192,84 @@
                         </div>
                     </div>
 
+                     <!-- Modal ver petición respondida-->
+                     <div class="modal fade" id="verPeticionModal" tabindex="-1" aria-labelledby="editarInfoModalLabel"
+                     aria-hidden="true">
+                     <div class="modal-dialog">
+                         <div class="modal-content">
+                             <div class="modal-header">
+                                 <h1 class="modal-title fs-5" id="editarInfoModalLabel">Información de la petición
+                                 </h1>
+                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                     aria-label="Close"></button>
+                             </div>
+                             <div class="modal-body">
+
+                                 <div class="row">
+                                     <div class="col-6">
+                                         <div class="mb-3">
+                                             <label for="cod" class="form-label">Id radicado</label>
+                                             <input class="form-control" readonly type="text" 
+                                                 id="radicado1">
+                                         </div>
+                                     </div>
+                                     <div class="col-6">
+                                         <div class="mb-3">
+                                             <label for="cod" class="form-label">Nombre usuario</label>
+                                             <input class="form-control" readonly type="text" 
+                                                 id="user1">
+                                         </div>
+                                     </div>
+                                 </div>
+                                 
+                                 <div class="row">
+                                     <div class="col-6">
+                                         <div class="mb-3">
+                                             <label for="cod" class="form-label">Área</label>
+                                             <input class="form-control" readonly type="text" 
+                                                 id="area1">
+                                         </div>
+                                     </div>
+                                     <div class="col-6">
+                                         <div class="mb-3">
+                                             <label for="cod" class="form-label">Prioridad</label>
+                                             <input class="form-control" readonly type="text" 
+                                                 id="prio1">
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="mb-3">
+                                     <label for="ema" class="form-label">Título</label>
+                                     <input class="form-control" type="text" readonly id="titulo1">
+                                 </div>
+                                 <div class="mb-3">
+                                     <label for="ema" class="form-label">Descripción</label>
+                                     <input class="form-control" type="text" readonly id="desc1">
+                                 </div>
+                                 <div id="bot">
+                                     <a href="" id="abtn1" style="text-decoration: none;">Descargar Anexo<i style="color:black" class="fas fa-file-download"></i></a>
+                                 </div>
+                                 <hr>
+                                 <div class="mb-3">
+                                     <label for="ema" class="form-label">Respuesta</label>
+                                     <input class="form-control" type="text" readonly id="resp1">
+                                 </div>
+                                 <div class="mb-3">
+                                     <label for="ema" class="form-label">Calificación</label>
+                                     <input class="form-control" type="number" readonly  id="cal1">
+                                 </div>
+                                 <div id="bot">
+                                     <a href="" id="abtn2" style="text-decoration: none;">Descargar Anexo<i style="color:black" class="fas fa-file-download"></i></a>
+                                 </div>
+                             </div>
+                             <div class="modal-footer">
+                                 <button type="button" class="btn btn-dark"
+                                     data-bs-dismiss="modal">Ok!</button>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
                 </div>
                 
                 <div id="footer"></div>

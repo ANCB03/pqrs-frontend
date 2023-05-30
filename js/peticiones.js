@@ -87,12 +87,12 @@ function llenarTablaRespondidas(){
 
             var accionColumna = document.createElement('td');
             var boton = document.createElement('button');
-            boton.textContent = 'Editar';
+            boton.textContent = 'Ver respuesta';
             boton.className = 'btn btn-primary';
             boton.setAttribute('data-bs-toggle', 'modal');
-            boton.setAttribute('data-bs-target', '#editarInfoModal');
+            boton.setAttribute('data-bs-target', '#verPeticionModal');
             boton.onclick = function () {
-                abrirModalEditarUsuario();
+                verRespuestaModal(data.historial[i].id_historial,data.historial[i].pqrs.id_radicado);
             };
 
             accionColumna.appendChild(boton);
@@ -146,7 +146,7 @@ function llenarTablaRechazadas(){
             boton.setAttribute('data-bs-toggle', 'modal');
             boton.setAttribute('data-bs-target', '#editarInfoModal');
             boton.onclick = function () {
-                abrirModalEditarUsuario();
+                verRespuestaModal2();
             };
 
             accionColumna.appendChild(boton);
@@ -273,6 +273,72 @@ input.addEventListener("change", function () {
     };
     lector.readAsDataURL(archivo);
 });
+
+
+function verRespuestaModal(id_historial,id_radicado){
+    fetch(`http://localhost:8080/historialestados/${id_historial}`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.historialEstados.pqrs.usuario.id_usuario)
+            id_radicado = data.historialEstados.pqrs.id_radicado;
+            document.getElementById('radicado1').value = data.historialEstados.pqrs.id_radicado;
+            document.getElementById('user1').value = data.historialEstados.pqrs.usuario.nombre;
+            document.getElementById('area1').value = data.historialEstados.pqrs.area.nombre;
+            document.getElementById('prio1').value = data.historialEstados.pqrs.prioridad.descripcion;
+            document.getElementById('titulo1').value = data.historialEstados.pqrs.titulo;
+            document.getElementById('desc1').value = data.historialEstados.pqrs.descripcion;
+
+            
+            var btn = document.getElementById('abtn1');
+
+            if (data.historialEstados.pqrs.anexo != "") {
+               
+                btn.href = base + data.historialEstados.pqrs.anexo;
+                btn.style.display = 'block';
+            }else{
+                btn.style.display = 'none';
+            }
+
+
+        }).catch(error => {
+            console.error('Error al obtener los datos:', error);
+        });
+
+        fetch(`http://localhost:8080/respuesta/radicado/${id_radicado}`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(id_radicado)
+            document.getElementById('resp1').value = data.respuesta.respuesta;
+            document.getElementById('cal1').value = data.respuesta.calificacion;
+            
+            var btn = document.getElementById('abtn2');
+
+            if (data.respuesta.anexo != "") {
+               
+                btn.href = base + data.respuesta.anexo;
+                btn.style.display = 'block';
+            }else{
+                btn.style.display = 'none';
+            }
+
+            
+        
+
+        }).catch(error => {
+            console.error('Error al obtener los datos:', error);
+        });
+}
+
 
 document.addEventListener("DOMContentLoaded", function () {
     llenarTablaPendiente();
