@@ -19,22 +19,6 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <script src="js/admin.js" defer></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-
-            const email = localStorage.getItem("email");
-            if (email != null) {
-                fetch("http://localhost:8080/usuario/encontrar/" + email)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log(data)
-                    });
-            } else {
-                window.location.href = "index.html";
-            }
-        });
-    </script>
 
 </head>
 
@@ -232,13 +216,20 @@
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Perfil
+                                    Profile
                                 </a>
-                                
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Cerrar sesión
+                                    Logout
                                 </a>
                             </div>
                         </li>
@@ -249,28 +240,6 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Listado Usuarios</h1>
-                        
-                    </div>
-
-                     <!-- Content Row -->
-                     <table class="table" id="algo">
-                        <thead>
-                          <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Correo</th>
-                            <th>Teléfono</th>
-                            <th>Rol</th>
-                            <th>Acción</th>
-                          </tr>
-                        </thead>
-                        <tbody></tbody>
-                      </table>
-                </div>
                 
                 <!-- /.container-fluid -->
 
@@ -304,26 +273,19 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cerrar sesión</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">¿Estas seguro de cerrar sesión?</div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="#" onclick="logout()">Cerrar sesión</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        function logout() {
-            localStorage.clear();
-            window.location.href = "login.html";
-        }
-    </script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
