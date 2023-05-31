@@ -69,7 +69,7 @@ let navbarTemplate = `
 
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="userDropdown">
-                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editarInfoModal">
+                    <a class="dropdown-item" href="editar-perfil-admin.html">
                         <i class="fas fa-user fa-sm fa-fw mr-2 mt-1 text-gray-400" ></i>
                         Mi Perfil
                         
@@ -84,51 +84,6 @@ let navbarTemplate = `
             </li>
 
         </ul>
-
-
-        <!-- Modal editar-->
-    <div class="modal fade" id="editarInfoModal" tabindex="-1" aria-labelledby="editarInfoModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="editarInfoModalLabel">Editar información básica</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                    <div class="mb-3">
-                        <label for="cod" class="form-label">Código</label>
-                        <input class="form-control" readonly type="text" placeholder="Digite su código" id="cod1">
-                    </div>
-                    <div class="mb-3">
-                        <label for="nom" class="form-label">Nombre</label>
-                        <input class="form-control" type="text" placeholder="Digite su nombre" id="nom1">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="ape" class="form-label">Apellido</label>
-                        <input class="form-control" type="text" placeholder="Digite su apellido" id="ape1">
-                    </div>
-                    <div class="mb-3">
-                        <label for="ema" class="form-label">Email</label>
-                        <input class="form-control" readonly type="text" placeholder="Digite su email" id="ema1">
-                    </div>
-                    <div class="mb-3">
-                        <label for="tel" class="form-label">Teléfono</label>
-                        <input class="form-control" type="number" placeholder="Digite su telefono" id="tel1">
-                    </div>
-                    <div class="mb-3">
-                        <label for="tel" class="form-label">Foto de perfil</label>
-                        <input class="form-control" type="file" id="foto1">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-dark" onclick="actualizarInfoAdmin();">Guardar</button>
-                </div>
-            </div>
-        </div>
-    </div>
     </nav>
     `;
 

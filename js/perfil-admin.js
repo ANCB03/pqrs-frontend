@@ -1,64 +1,97 @@
-const id_usuario = localStorage.getItem("id_usuario");
-
-let respuestas = [];
-
-const miPerfilAdmin = () => {
-
-    const codigo = document.getElementById('codigo');
-    const nombres = document.getElementById('nombres');
-    const email = document.getElementById('email');
-    const telefono = document.getElementById('telefono');
+var tbody = document.querySelector('tbody')
+var id_usuario = localStorage.getItem('id_usuario');
 
 
-    if (localStorage.getItem("email") != null) {
-        fetch("http://localhost:8080/usuario/encontrar/" + localStorage.getItem("email"), {
+fetch( `http://localhost:8080/usuario/${id_usuario}`, {
+    method: "GET",
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
+})
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+            var fila = document.createElement('tr');
+
+                var idColumna = document.createElement('td');
+            idColumna.textContent = data.usuario.id_usuario;
+            fila.appendChild(idColumna);
+
+            var nombreColumna = document.createElement('td');
+            nombreColumna.textContent = data.usuario.nombre;
+            fila.appendChild(nombreColumna);
+
+            var apellido = document.createElement('td');
+            apellido.textContent = data.usuario.apellido;
+            fila.appendChild(apellido);
+
+            var email = document.createElement('td');
+            email.textContent = data.usuario.email;
+            fila.appendChild(email);
+
+            var telefono = document.createElement('td');
+            telefono.textContent = data.usuario.telefono;
+            fila.appendChild(telefono);
+
+            var accionColumna = document.createElement('td');
+            var boton = document.createElement('button');
+            boton.textContent = 'Editar';
+            boton.className = 'btn btn-primary';
+            boton.setAttribute('data-bs-toggle', 'modal');
+            boton.setAttribute('data-bs-target', '#editarInfoModal');
+            boton.onclick = function () {
+                abrirModalEditarAdmin(data.usuario.id_usuario);
+            };
+
+            accionColumna.appendChild(boton);
+            fila.appendChild(accionColumna);
+            
+            
+
+            tbody.appendChild(fila);
+        
+    })
+    .catch(error => {
+        console.error('Error al obtener los datos:', error);
+    });
+
+    function abrirModalEditarAdmin(idUsuario) {
+
+        fetch(`http://localhost:8080/usuario/${idUsuario}`, {
+            method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
-            .then((response) => response.json())
-            .then((data) => {
-
-                console.log(data)
-                const imagen = document.getElementById('img');
-                imagen.src = base + data.usuario.imagen;
-                codigo.innerText = data.usuario.id_usuario;
-                nombres.innerText = data.usuario.nombre + " " + data.usuario.apellido;
-                email.innerText = data.usuario.email;
-                telefono.innerText = data.usuario.telefono;
-
-                respuestas = data.usuario.respuestas;
-
-                //edicion
-
-                const cod = document.getElementById('cod1');
-                const nom = document.getElementById('nom1');
-                const ape = document.getElementById('ape1');
-                const ema = document.getElementById('ema1');
-                const tel = document.getElementById('tel1');
-
-                cod.value = data.usuario.id_usuario;
-                nom.value = data.usuario.nombre;
-                ape.value = data.usuario.apellido;
-                ema.value = data.usuario.email;
-                tel.value = data.usuario.telefono;
-
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('cod').value = data.usuario.id_usuario;
+                document.getElementById('nom').value = data.usuario.nombre;
+                document.getElementById('ape').value = data.usuario.apellido;
+                document.getElementById('ema').value = data.usuario.email;
+                document.getElementById('tel').value = data.usuario.telefono;
+    
+                var boton = document.getElementById('enviar');
+                boton.onclick = function () {
+                    actualizarInfo(data.usuario.id_usuario);
+                };
+    
+            }).catch(error => {
+                console.error('Error al obtener los datos:', error);
             });
+    
     }
 
-}
-
-
-var base64 = "";
+    var base64 = "";
 var nombreImagen = "";
 var extImagen = "";
 
-const actualizarInfoAdmin = () => {
-    const cod = document.getElementById('cod1').value;
-    const nom = document.getElementById('nom1').value;
-    const ape = document.getElementById('ape1').value;
-    const ema = document.getElementById('ema1').value;
-    const tel = document.getElementById('tel1').value;
+function actualizarInfo(id_usuario) {
+    const cod = document.getElementById('cod').value;
+    const nom = document.getElementById('nom').value;
+    const ape = document.getElementById('ape').value;
+    const ema = document.getElementById('ema').value;
+    const tel = document.getElementById('tel').value;
 
     let imagen = base64;
 
@@ -97,7 +130,7 @@ const actualizarInfoAdmin = () => {
                 confirmButtonText: "Aceptar"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = 'admin.html'
+                    window.location.href = 'editar-perfil-admin.html'
                 }
             })
         })
@@ -106,10 +139,7 @@ const actualizarInfoAdmin = () => {
         });
 }
 
-// Obtener referencia al elemento <input type="file">
-var input = document.getElementById("foto1");
-
-// Agregar evento de cambio al elemento
+var input = document.getElementById("foto");
 input.addEventListener("change", function () {
 
     var archivo = input.files[0];
@@ -122,14 +152,8 @@ input.addEventListener("change", function () {
     lector.onload = function (evento) {
         var base64Image = evento.target.result.split(",")[1];
         base64 = `${base64Image} ${extImagen} ${nombreImagen}`;
+        console.log(base64)
 
     };
     lector.readAsDataURL(archivo);
-});
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    miPerfilAdmin();
-    console.log("algooo")
 });
