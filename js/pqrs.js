@@ -22,6 +22,7 @@ const listarAreas = () => {
 
       data.areas.forEach((item) => {
         let option = document.createElement("option");
+        console.log(item)
         option.value = item.id_area;
         option.text = item.nombre;
         selectArea.appendChild(option);
@@ -42,8 +43,13 @@ const enviarData = () => {
 
   let id_usuario = localStorage.getItem("id_usuario");
 
-  let area = document.getElementById("combo-box-Categoria").value;
-  let tipo = document.getElementById("combo-box-Area").value;
+  let tipo = document.getElementById("combo-box-Categoria");
+  let tipoSelected = tipo.options[tipo.selectedIndex];
+  let idTipo = tipoSelected.getAttribute('value');
+
+  let area = document.getElementById("combo-box-Area");
+  let areaSelected = area.options[area.selectedIndex];
+  let idArea = areaSelected.getAttribute('value');
 
   const pqrs = {
     titulo: titulo,
@@ -52,12 +58,12 @@ const enviarData = () => {
     usuario: {
       id_usuario: id_usuario,
     },
-    prioridad: null,
+    prioridad: {id_prioridad: 2},
     area: {
-      id_area : area,
+      id_area : idArea,
     },
     tipo: {
-      id_tipo: tipo,
+      id_tipo: idTipo,
     }
   };
 

@@ -25,7 +25,6 @@
 
     <script src="js/reportes.js"></script>
 
-    
 
 </head>
 
@@ -46,6 +45,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
             <div id="content">
+
                 <div id="navbar"></div>
 
                 <!-- CONTENIDO -->
@@ -53,54 +53,261 @@
 
                     <div class="row">
                         <div class="col-6 d-flex justify-content-start">
-                            <h1 class="h3 mb-0 text-gray-800">Titulo</h1>
+                            <h1 class="h3 mb-0 text-gray-800">Peticiones Pendientes</h1>
                         </div>
                         <div class="col-6 d-flex justify-content-end pr-4" >
-                            <button type="button" class="btn btn-outline-danger" onclick="generarReporte(2)">
+                            <button type="button" class="btn btn-outline-danger" onclick="generarReporte(1)">
                                 <i class="fas fa-file-pdf pr-2"></i>
                                 Reporte PDF
                             </button>
                         </div>
                     </div>
 
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Titulo</th>
+                                <th>Tipo</th>
+                                <th>Usuario</th>
+                                <th>Área</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpo1"></tbody>
+                    </table>
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Peticiones Respondidas</h1>
+                    </div>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Titulo</th>
+                                <th>Tipo</th>
+                                <th>Usuario</th>
+                                <th>Área</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpo2"></tbody>
+                    </table>
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Peticiones Rechazadas</h1>
+                    </div>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Titulo</th>
+                                <th>Tipo</th>
+                                <th>Usuario</th>
+                                <th>Área</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpo3"></tbody>
+                    </table>
+
+
+                    <!-- Modal responder-->
+                    <div class="modal fade" id="responderModal" tabindex="-1" aria-labelledby="editarInfoModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="editarInfoModalLabel">Información de la petición
+                                    </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="mb-3">
+                                                <label for="cod" class="form-label">Id radicado</label>
+                                                <input class="form-control" readonly type="text" 
+                                                    id="radicado">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="mb-3">
+                                                <label for="cod" class="form-label">Nombre usuario</label>
+                                                <input class="form-control" readonly type="text" 
+                                                    id="user">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="mb-3">
+                                                <label for="cod" class="form-label">Área</label>
+                                                <input class="form-control" readonly type="text" 
+                                                    id="area">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="mb-3">
+                                                <label for="cod" class="form-label">Prioridad</label>
+                                                <input class="form-control" readonly type="text" 
+                                                    id="prio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ema" class="form-label">Título</label>
+                                        <input class="form-control" type="text" readonly id="titulo">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ema" class="form-label">Descripción</label>
+                                        <input class="form-control" type="text" readonly id="desc">
+                                    </div>
+                                    <div id="bot">
+                                        <a href="" id="abtn" style="text-decoration: none;">Descargar Anexo<i style="color:black" class="fas fa-file-download"></i></a>
+                                    </div>
+                                    <hr>
+                                    <div class="mb-3">
+                                        <label for="ema" class="form-label">Respuesta</label>
+                                        <input class="form-control" type="text" placeholder="Ingresa la respuesta" id="resp">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ema" class="form-label">Calificación</label>
+                                        <input class="form-control" type="number" placeholder="Ingresa la calificación" id="cal">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ema" class="form-label">Anexo</label>
+                                        <input class="form-control" type="file"  id="anexo">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-dark" id="enviar"
+                                        onclick="actualizarInfo();">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- Modal ver petición respondida-->
+                     <div class="modal fade" id="verPeticionModal" tabindex="-1" aria-labelledby="editarInfoModalLabel"
+                     aria-hidden="true">
+                     <div class="modal-dialog">
+                         <div class="modal-content">
+                             <div class="modal-header">
+                                 <h1 class="modal-title fs-5" id="editarInfoModalLabel">Información de la petición
+                                 </h1>
+                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                     aria-label="Close"></button>
+                             </div>
+                             <div class="modal-body">
+
+                                 <div class="row">
+                                     <div class="col-6">
+                                         <div class="mb-3">
+                                             <label for="cod" class="form-label">Id radicado</label>
+                                             <input class="form-control" readonly type="text" 
+                                                 id="radicado1">
+                                         </div>
+                                     </div>
+                                     <div class="col-6">
+                                         <div class="mb-3">
+                                             <label for="cod" class="form-label">Nombre usuario</label>
+                                             <input class="form-control" readonly type="text" 
+                                                 id="user1">
+                                         </div>
+                                     </div>
+                                 </div>
+                                 
+                                 <div class="row">
+                                     <div class="col-6">
+                                         <div class="mb-3">
+                                             <label for="cod" class="form-label">Área</label>
+                                             <input class="form-control" readonly type="text" 
+                                                 id="area1">
+                                         </div>
+                                     </div>
+                                     <div class="col-6">
+                                         <div class="mb-3">
+                                             <label for="cod" class="form-label">Prioridad</label>
+                                             <input class="form-control" readonly type="text" 
+                                                 id="prio1">
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="mb-3">
+                                     <label for="ema" class="form-label">Título</label>
+                                     <input class="form-control" type="text" readonly id="titulo1">
+                                 </div>
+                                 <div class="mb-3">
+                                     <label for="ema" class="form-label">Descripción</label>
+                                     <input class="form-control" type="text" readonly id="desc1">
+                                 </div>
+                                 <div id="bot">
+                                     <a href="" id="abtn1" style="text-decoration: none;">Descargar Anexo<i style="color:black" class="fas fa-file-download"></i></a>
+                                 </div>
+                                 <hr>
+                                 <div class="mb-3">
+                                     <label for="ema" class="form-label">Respuesta</label>
+                                     <input class="form-control" type="text" readonly id="resp1">
+                                 </div>
+                                 <div class="mb-3">
+                                     <label for="ema" class="form-label">Calificación</label>
+                                     <input class="form-control" type="number" readonly  id="cal1">
+                                 </div>
+                                 <div id="bot">
+                                     <a href="" id="abtn2" style="text-decoration: none;">Descargar Anexo<i style="color:black" class="fas fa-file-download"></i></a>
+                                 </div>
+                             </div>
+                             <div class="modal-footer">
+                                 <button type="button" class="btn btn-dark"
+                                     data-bs-dismiss="modal">Ok!</button>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
 
                 </div>
-                <!-- fin de contenido -->
-
-                <!-- Footer -->
+                
                 <div id="footer"></div>
 
-                <!-- End of Footer -->
-
             </div>
-            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Page Wrapper -->
 
-        <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
 
+        <!-- Logout Modal-->
         <div id="logout"></div>
 
+    </div>
 
-       
+        
 
+        <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+        <!-- Core plugin JavaScript-->
         <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
+        <!-- Custom scripts for all pages-->
         <script src="js/sb-admin-2.min.js"></script>
 
+        <!-- Page level plugins -->
         <script src="vendor/chart.js/Chart.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
-
+        
         <script src="dashboard-template.js"></script>
+
+        <script src="js/quejasUsuarios.js" defer></script>
 
 
 </body>
