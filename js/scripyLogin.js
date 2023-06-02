@@ -27,7 +27,7 @@ formeElement.addEventListener("submit", (event)=> {
 
                 if(data.rol == "ROLE_ADMIN"){
                     window.location.href = 'admin.html'
-                } else if(data.rol == "ROLE_STUDENT") {
+                } else if(data.rol == "ROLE_STUDENT" || data.rol == "ROLE_TEACHER") {
                     window.location.href = 'index.html'
                 }
                 console.log(data)

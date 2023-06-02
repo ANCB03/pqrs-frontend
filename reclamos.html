@@ -54,7 +54,7 @@
 
                     <div class="row mb-4">
                         <div class="col-6 d-flex justify-content-start">
-                            <h1 class="h3 mb-0 text-gray-800">Peticiones Pendientes</h1>
+                            <h1 class="h3 mb-0 text-gray-800">Reclamos Pendientes</h1>
                         </div>
                         <div class="col-6 d-flex justify-content-end pr-4">
                             <button type="button" class="btn btn-outline-danger" onclick="generarReporte(3)">
@@ -64,7 +64,7 @@
                         </div>
                     </div>
 
-                    <table class="table">
+                    <table class="table" id="rec1">
                         <thead>
                             <tr>
                                 <th>Titulo</th>
@@ -78,10 +78,10 @@
                     </table>
 
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Peticiones Respondidas</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Reclamos Respondidos</h1>
                     </div>
 
-                    <table class="table">
+                    <table class="table" id="rec2">
                         <thead>
                             <tr>
                                 <th>Titulo</th>
@@ -95,10 +95,10 @@
                     </table>
 
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Peticiones Rechazadas</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Reclamos Rechazados</h1>
                     </div>
 
-                    <table class="table">
+                    <table class="table" id="rec3">
                         <thead>
                             <tr>
                                 <th>Titulo</th>
@@ -170,11 +170,6 @@
                                         <label for="ema" class="form-label">Respuesta</label>
                                         <input class="form-control" type="text" placeholder="Ingresa la respuesta"
                                             id="resp">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="ema" class="form-label">Calificación</label>
-                                        <input class="form-control" type="number" placeholder="Ingresa la calificación"
-                                            id="cal">
                                     </div>
                                     <div class="mb-3">
                                         <label for="ema" class="form-label">Anexo</label>

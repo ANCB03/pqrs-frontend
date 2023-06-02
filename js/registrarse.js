@@ -11,6 +11,7 @@ formeElement.addEventListener("submit", (event) => {
   let telefono = document.getElementById("telefono").value;
   let email = document.getElementById("email").value;
   let password = document.getElementById("password").value;
+  let rol = document.getElementById("rol").value;
   let imagen = base64;
 
   const registro = {
@@ -21,7 +22,7 @@ formeElement.addEventListener("submit", (event) => {
     email: email,
     password: password,
     imagen: imagen,
-    rol: { id_rol: 2 },
+    rol: { id_rol: rol },
   };
 
   let registroJSON = JSON.stringify(registro);

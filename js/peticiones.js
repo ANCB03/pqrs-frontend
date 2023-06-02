@@ -1,168 +1,305 @@
 
-function llenarTablaPendiente(){
-    var tbody = document.getElementById('cuerpo1')
+function llenarTablaPeticionesPendientes() {
+    var tbodyP = document.getElementById('peticiones1')
     fetch('http://localhost:8080/historialestados/filtro/2/1', {
-    method: "GET",
-    headers: {
-        Authorization: `Bearer ${token}`
-    }
-})
-    .then(response => response.json())
-    .then(data => {
-        // Recorrer los datos obtenidos y agregar filas a la tabla
-        console.log(data)
-        for (let i = 0; i < data.historial.length; i++) {
-            var fila = document.createElement('tr');
-
-            var titulo = document.createElement('td');
-            titulo.textContent = data.historial[i].pqrs.titulo;
-            fila.appendChild(titulo);
-
-            var tipo = document.createElement('td');
-            tipo.textContent = data.historial[i].pqrs.tipo.nombre;
-            fila.appendChild(tipo);
-
-            var usuario = document.createElement('td');
-            usuario.textContent = data.historial[i].pqrs.usuario.nombre;
-            fila.appendChild(usuario);
-
-            var area = document.createElement('td');
-            area.textContent = data.historial[i].pqrs.area.nombre;
-            fila.appendChild(area);
-
-            var accionColumna = document.createElement('td');
-            var boton = document.createElement('button');
-            boton.textContent = 'Responder';
-            boton.className = 'btn btn-primary';
-            boton.setAttribute('data-bs-toggle', 'modal');
-            boton.setAttribute('data-bs-target', '#responderModal');
-            boton.onclick = function () {
-                responderPeticion(data.historial[i].id_historial);
-            };
-
-            accionColumna.appendChild(boton);
-            fila.appendChild(accionColumna);
-
-            tbody.appendChild(fila);
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`
         }
-
-        
     })
-    .catch(error => {
-        console.error('Error al obtener los datos:', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+
+            console.log("dataaaaaaaaaaaa")
+            console.log(data)
+
+            if (data.historial.length > 0) {
+
+                for (let i = 0; i < data.historial.length; i++) {
+
+                    let fila = document.createElement('tr');
+                    fila.id = "fila-peticiones1"+i;
+
+
+                    let titulo = document.createElement('td');
+                    titulo.id = "peticiones-titulo1"
+                    titulo.textContent = data.historial[i].pqrs.titulo;
+                    fila.appendChild(titulo);
+
+                    let tipo = document.createElement('td');
+                    tipo.id = "peticiones-tipo1"
+                    tipo.textContent = data.historial[i].pqrs.tipo.nombre;
+                    fila.appendChild(tipo);
+
+                    let usuario = document.createElement('td');
+                    usuario.id = "peticiones-usuario1"
+                    usuario.textContent = data.historial[i].pqrs.usuario.nombre;
+                    fila.appendChild(usuario);
+
+                    let area = document.createElement('td');
+                    area.id = "peticiones-area1"
+                    area.textContent = data.historial[i].pqrs.area.nombre;
+                    fila.appendChild(area);
+
+                    let accionColumna = document.createElement('td');
+                    accionColumna.id = "peticiones-accion1"
+                    let boton = document.createElement('button');
+                    boton.id = "peticiones-boton1"
+                    boton.textContent = 'Responder';
+                    boton.className = 'btn btn-primary';
+                    boton.setAttribute('data-bs-toggle', 'modal');
+                    boton.setAttribute('data-bs-target', '#responderModal');
+                    boton.onclick = function () {
+                        responderPeticion(data.historial[i].id_historial);
+                    };
+
+                    accionColumna.appendChild(boton);
+
+                    let rechazar = document.createElement('button');
+                    rechazar.id = "peticiones-rechazar1"
+                    rechazar.textContent = ' Rechazar';
+                    rechazar.className = 'btn btn-danger ml-2';
+                    rechazar.onclick = function () {
+
+                        const fechaActual = new Date();
+
+                        const rechazarEstado = {
+                            fecha_cambio: fechaActual,
+                            pqrs: {
+                                id_radicado: data.historial[i].pqrs.id_radicado
+                            },
+                            estado: {
+                                id_estado: 3
+                            }
+                        }
+
+                        console.log(rechazarEstado)
+
+                        let rechazarEstadoJSON = JSON.stringify(rechazarEstado);
+
+                        Swal.fire({
+                            title: "Atención",
+                            text: "¿Estas seguro de rechazar la petición?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: "Aceptar"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                fetch("http://localhost:8080/historialestados/guardar", {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        Authorization: `Bearer ${token}`
+                                    },
+                                    body: rechazarEstadoJSON,
+                                })
+                                    .then((response) => response.json())
+                                    .then((data) => {
+                                        console.log(data);
+
+                                        Swal.fire('Información', 'Petición rechazada', 'success')
+                                        window.location.href = 'peticiones.html'
+
+                                    })
+                                    .catch((error) => {
+                                        console.error("Error al intentar guardar:", error);
+                                    });
+                            } 
+                        })
+
+
+
+
+                    };
+
+                    accionColumna.appendChild(rechazar);
+
+                    fila.appendChild(accionColumna);
+
+                    tbodyP.appendChild(fila);
+                }
+            } else {
+                let fila = document.createElement('tr');
+                fila.id = "fila-rta1";
+
+                let rta = document.createElement('td');
+                rta.id = "rta1";
+
+
+                rta.textContent = "No hay datos";
+                rta.colSpan = 5;
+
+
+                rta.style.textAlign = "center";
+
+                fila.appendChild(rta);
+                tbodyP.appendChild(fila);
+            }
+
+
+        })
+        .catch(error => {
+            console.error('Error al obtener los datos:', error);
+        });
 
 }
 
-function llenarTablaRespondidas(){
-    var tbody = document.getElementById('cuerpo2')
+
+function llenarTablaPeticionesRespondidos() {
+    var tbodyR = document.getElementById('peticiones2')
     fetch('http://localhost:8080/historialestados/filtro/1/1', {
-    method: "GET",
-    headers: {
-        Authorization: `Bearer ${token}`
-    }
-})
-    .then(response => response.json())
-    .then(data => {
-        // Recorrer los datos obtenidos y agregar filas a la tabla
-        console.log(data)
-        for (let i = 0; i < data.historial.length; i++) {
-            var fila = document.createElement('tr');
-
-            var titulo = document.createElement('td');
-            titulo.textContent = data.historial[i].pqrs.titulo;
-            fila.appendChild(titulo);
-
-            var tipo = document.createElement('td');
-            tipo.textContent = data.historial[i].pqrs.tipo.nombre;
-            fila.appendChild(tipo);
-
-            var usuario = document.createElement('td');
-            usuario.textContent = data.historial[i].pqrs.usuario.nombre;
-            fila.appendChild(usuario);
-
-            var area = document.createElement('td');
-            area.textContent = data.historial[i].pqrs.area.nombre;
-            fila.appendChild(area);
-
-            var accionColumna = document.createElement('td');
-            var boton = document.createElement('button');
-            boton.textContent = 'Ver respuesta';
-            boton.className = 'btn btn-primary';
-            boton.setAttribute('data-bs-toggle', 'modal');
-            boton.setAttribute('data-bs-target', '#verPeticionModal');
-            boton.onclick = function () {
-                verRespuestaModal(data.historial[i].id_historial,data.historial[i].pqrs.id_radicado);
-            };
-
-            accionColumna.appendChild(boton);
-            fila.appendChild(accionColumna);
-
-            tbody.appendChild(fila);
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`
         }
-
-        
     })
-    .catch(error => {
-        console.error('Error al obtener los datos:', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+
+            console.log(data)
+
+            if (data.historial.length > 0) {
+
+                for (let i = 0; i < data.historial.length; i++) {
+                    let fila = document.createElement('tr');
+                    fila.id = "fila-peticiones2"+i;
+
+
+                    let titulo = document.createElement('td');
+                    titulo.id = "peticiones-titulo2"
+                    titulo.textContent = data.historial[i].pqrs.titulo;
+                    fila.appendChild(titulo);
+
+                    let tipo = document.createElement('td');
+                    tipo.id = "peticiones-tipo2"
+                    tipo.textContent = data.historial[i].pqrs.tipo.nombre;
+                    fila.appendChild(tipo);
+
+                    let usuario = document.createElement('td');
+                    usuario.id = "peticiones-usuario2"
+                    usuario.textContent = data.historial[i].pqrs.usuario.nombre;
+                    fila.appendChild(usuario);
+
+                    let area = document.createElement('td');
+                    area.id = "peticiones-area2"
+                    area.textContent = data.historial[i].pqrs.area.nombre;
+                    fila.appendChild(area);
+
+                    let accionColumna = document.createElement('td');
+                    accionColumna.id = "peticiones-accion2"
+                    let boton = document.createElement('button');
+                    boton.id = "peticiones-boton2"
+                    boton.textContent = 'Ver respuesta';
+                    boton.className = 'btn btn-primary';
+                    boton.setAttribute('data-bs-toggle', 'modal');
+                    boton.setAttribute('data-bs-target', '#verPeticionModal');
+
+
+                    boton.onclick = function () {
+                        verRespuestaPeticionesModal(data.historial[i].id_historial, data.historial[i].pqrs.id_radicado);
+                    };
+
+                    accionColumna.appendChild(boton);
+                    fila.appendChild(accionColumna);
+
+                    tbodyR.appendChild(fila);
+                }
+            } else {
+
+                let fila = document.createElement('tr');
+                fila.id = "fila-rta2";
+
+                let rta = document.createElement('td');
+                rta.id = "rta2";
+
+                rta.textContent = "No hay datos";
+                rta.colSpan = 5;
+
+
+                rta.style.textAlign = "center";
+
+                fila.appendChild(rta);
+                tbodyR.appendChild(fila);
+            }
+
+
+        })
+        .catch(error => {
+            console.error('Error al obtener los datos:', error);
+        });
 }
 
-function llenarTablaRechazadas(){
-    var tbody = document.getElementById('cuerpo3')
+function llenarTablaPeticionesRechazados() {
+    var tbodyRe = document.getElementById('peticiones3')
     fetch('http://localhost:8080/historialestados/filtro/3/1', {
-    method: "GET",
-    headers: {
-        Authorization: `Bearer ${token}`
-    }
-})
-    .then(response => response.json())
-    .then(data => {
-        // Recorrer los datos obtenidos y agregar filas a la tabla
-        console.log(data)
-        for (let i = 0; i < data.historial.length; i++) {
-            var fila = document.createElement('tr');
-
-            var titulo = document.createElement('td');
-            titulo.textContent = data.historial[i].pqrs.titulo;
-            fila.appendChild(titulo);
-
-            var tipo = document.createElement('td');
-            tipo.textContent = data.historial[i].pqrs.tipo.nombre;
-            fila.appendChild(tipo);
-
-            var usuario = document.createElement('td');
-            usuario.textContent = data.historial[i].pqrs.usuario.nombre;
-            fila.appendChild(usuario);
-
-            var area = document.createElement('td');
-            area.textContent = data.historial[i].pqrs.area.nombre;
-            fila.appendChild(area);
-
-            var accionColumna = document.createElement('td');
-            var boton = document.createElement('button');
-            boton.textContent = 'Editar';
-            boton.className = 'btn btn-primary';
-            boton.setAttribute('data-bs-toggle', 'modal');
-            boton.setAttribute('data-bs-target', '#editarInfoModal');
-            boton.onclick = function () {
-                verRespuestaModal2();
-            };
-
-            accionColumna.appendChild(boton);
-            fila.appendChild(accionColumna);
-
-            tbody.appendChild(fila);
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`
         }
-
-        
     })
-    .catch(error => {
-        console.error('Error al obtener los datos:', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            // Recorrer los datos obtenidos y agregar filas a la tabla
+            console.log(data)
+
+
+            if (data.historial.length > 0) {
+
+                for (let i = 0; i < data.historial.length; i++) {
+                    let fila = document.createElement('tr');
+                    fila.id = "fila-peticiones3"+i;
+
+
+                    let titulo = document.createElement('td');
+                    titulo.id = "peticiones-titulo3"
+                    titulo.textContent = data.historial[i].pqrs.titulo;
+                    fila.appendChild(titulo);
+
+                    let tipo = document.createElement('td');
+                    tipo.id = "peticiones-tipo3"
+                    tipo.textContent = data.historial[i].pqrs.tipo.nombre;
+                    fila.appendChild(tipo);
+
+                    let usuario = document.createElement('td');
+                    usuario.id = "peticiones-usuario3"
+                    usuario.textContent = data.historial[i].pqrs.usuario.nombre;
+                    fila.appendChild(usuario);
+
+                    let area = document.createElement('td');
+                    area.id = "peticiones-area3"
+                    area.textContent = data.historial[i].pqrs.area.nombre;
+                    fila.appendChild(area);
+
+
+
+                    tbodyRe.appendChild(fila);
+                }
+            } else {
+                let fila = document.createElement('tr');
+                fila.id = "fila-rta3";
+
+                let rta = document.createElement('td');
+                rta.id = "rta3";
+
+                rta.textContent = "No hay datos";
+                rta.colSpan = 5;
+
+
+                rta.style.textAlign = "center";
+
+                fila.appendChild(rta);
+                tbodyRe.appendChild(fila);
+            }
+
+        })
+        .catch(error => {
+            console.error('Error al obtener los datos:', error);
+        });
 }
 
-function responderPeticion(id_historial){
+function responderPeticion(id_historial) {
     //console.log(id_historial);
     fetch(`http://localhost:8080/historialestados/${id_historial}`, {
         method: "GET",
@@ -180,20 +317,20 @@ function responderPeticion(id_historial){
             document.getElementById('titulo').value = data.historialEstados.pqrs.titulo;
             document.getElementById('desc').value = data.historialEstados.pqrs.descripcion;
 
-            
-            var btn = document.getElementById('abtn');
+
+            let btn = document.getElementById('abtn');
 
             if (data.historialEstados.pqrs.anexo != "") {
-               
+
                 btn.href = base + data.historialEstados.pqrs.anexo;
                 btn.style.display = 'block';
-            }else{
+            } else {
                 btn.style.display = 'none';
             }
 
-            var boton = document.getElementById('enviar');
+            let boton = document.getElementById('enviar');
             boton.onclick = function () {
-                actualizarInfo();
+                actualizarInfoPeticiones();
             };
 
         }).catch(error => {
@@ -204,19 +341,18 @@ function responderPeticion(id_historial){
 var base64 = "";
 var nombreImagen = "";
 var extImagen = "";
-function actualizarInfo() {
+function actualizarInfoPeticiones() {
     const admin = localStorage.getItem('id_usuario');
     const respuesta = document.getElementById('resp').value;
-    const cal = document.getElementById('cal').value;
     const rad = document.getElementById('radicado').value;
 
     let imagen = base64;
 
     const data = {
         respuesta: respuesta,
-        calificacion: cal,
-        usuario: {id_usuario: parseInt(admin)},
-        pqrs: {id_radicado: parseInt(rad)},
+        calificacion: 1,
+        usuario: { id_usuario: parseInt(admin) },
+        pqrs: { id_radicado: parseInt(rad) },
         anexo: imagen,
     }
     console.log(data)
@@ -275,7 +411,7 @@ input.addEventListener("change", function () {
 });
 
 
-function verRespuestaModal(id_historial,id_radicado){
+function verRespuestaPeticionesModal(id_historial, id_radicado) {
     fetch(`http://localhost:8080/historialestados/${id_historial}`, {
         method: "GET",
         headers: {
@@ -293,14 +429,14 @@ function verRespuestaModal(id_historial,id_radicado){
             document.getElementById('titulo1').value = data.historialEstados.pqrs.titulo;
             document.getElementById('desc1').value = data.historialEstados.pqrs.descripcion;
 
-            
+
             var btn = document.getElementById('abtn1');
 
             if (data.historialEstados.pqrs.anexo != "") {
-               
+
                 btn.href = base + data.historialEstados.pqrs.anexo;
                 btn.style.display = 'block';
-            }else{
+            } else {
                 btn.style.display = 'none';
             }
 
@@ -309,7 +445,7 @@ function verRespuestaModal(id_historial,id_radicado){
             console.error('Error al obtener los datos:', error);
         });
 
-        fetch(`http://localhost:8080/respuesta/radicado/${id_radicado}`, {
+    fetch(`http://localhost:8080/respuesta/radicado/${id_radicado}`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
@@ -317,33 +453,31 @@ function verRespuestaModal(id_historial,id_radicado){
     })
         .then(response => response.json())
         .then(data => {
-            console.log(id_radicado)
+            console.log(data)
             document.getElementById('resp1').value = data.respuesta.respuesta;
             document.getElementById('cal1').value = data.respuesta.calificacion;
-            
+
             var btn = document.getElementById('abtn2');
 
             if (data.respuesta.anexo != "") {
-               
+
                 btn.href = base + data.respuesta.anexo;
                 btn.style.display = 'block';
-            }else{
+            } else {
                 btn.style.display = 'none';
             }
 
-            
-        
+
+
 
         }).catch(error => {
             console.error('Error al obtener los datos:', error);
         });
 }
 
-
 document.addEventListener("DOMContentLoaded", function () {
-    llenarTablaPendiente();
-    llenarTablaRespondidas();
-    llenarTablaRechazadas();
+    llenarTablaPeticionesPendientes();
+    llenarTablaPeticionesRespondidos();
+    llenarTablaPeticionesRechazados();
 });
 
-    

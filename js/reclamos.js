@@ -1,6 +1,6 @@
 
-function llenarTablaPendiente() {
-    var tbody = document.getElementById('reclamos1')
+function llenarTablaReclamosPendientes() {
+    var tbodyP = document.getElementById('reclamos1')
     fetch('http://localhost:8080/historialestados/filtro/2/3', {
         method: "GET",
         headers: {
@@ -18,6 +18,8 @@ function llenarTablaPendiente() {
                 for (let i = 0; i < data.historial.length; i++) {
 
                     let fila = document.createElement('tr');
+                    fila.id = "fila-reclamos1"+i;
+
 
                     let titulo = document.createElement('td');
                     titulo.id = "reclamos-titulo1"
@@ -48,7 +50,7 @@ function llenarTablaPendiente() {
                     boton.setAttribute('data-bs-toggle', 'modal');
                     boton.setAttribute('data-bs-target', '#responderModal');
                     boton.onclick = function () {
-                        responderPeticion(data.historial[i].id_historial);
+                        responderReclamo(data.historial[i].id_historial);
                     };
 
                     accionColumna.appendChild(boton);
@@ -77,7 +79,7 @@ function llenarTablaPendiente() {
 
                         Swal.fire({
                             title: "Atención",
-                            text: "¿Estas seguro de rechazar la petición?",
+                            text: "¿Estas seguro de rechazar el Reclamo?",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: '#3085d6',
@@ -97,7 +99,7 @@ function llenarTablaPendiente() {
                                     .then((data) => {
                                         console.log(data);
 
-                                        Swal.fire('Información', 'Petición rechazada', 'success')
+                                        Swal.fire('Información', 'Reclamo rechazado', 'success')
                                         window.location.href = 'reclamos.html'
 
                                     })
@@ -116,11 +118,15 @@ function llenarTablaPendiente() {
 
                     fila.appendChild(accionColumna);
 
-                    tbody.appendChild(fila);
+                    tbodyP.appendChild(fila);
                 }
             } else {
                 let fila = document.createElement('tr');
+                fila.id = "fila-rta1";
+
                 let rta = document.createElement('td');
+                rta.id = "rta1";
+
 
                 rta.textContent = "No hay datos";
                 rta.colSpan = 5;
@@ -129,7 +135,7 @@ function llenarTablaPendiente() {
                 rta.style.textAlign = "center";
 
                 fila.appendChild(rta);
-                tbody.appendChild(fila);
+                tbodyP.appendChild(fila);
             }
 
 
@@ -141,8 +147,8 @@ function llenarTablaPendiente() {
 }
 
 
-function llenarTablaRespondidas() {
-    var tbody = document.getElementById('reclamos2')
+function llenarTablaReclamosRespondidos() {
+    var tbodyR = document.getElementById('reclamos2')
     fetch('http://localhost:8080/historialestados/filtro/1/3', {
         method: "GET",
         headers: {
@@ -158,6 +164,8 @@ function llenarTablaRespondidas() {
 
                 for (let i = 0; i < data.historial.length; i++) {
                     let fila = document.createElement('tr');
+                    fila.id = "fila-reclamos2"+i;
+
 
                     let titulo = document.createElement('td');
                     titulo.id = "reclamos-titulo2"
@@ -190,19 +198,21 @@ function llenarTablaRespondidas() {
 
 
                     boton.onclick = function () {
-                        verRespuestaModal(data.historial[i].id_historial, data.historial[i].pqrs.id_radicado);
+                        verRespuestaReclamosModal(data.historial[i].id_historial, data.historial[i].pqrs.id_radicado);
                     };
 
                     accionColumna.appendChild(boton);
                     fila.appendChild(accionColumna);
 
-                    tbody.appendChild(fila);
+                    tbodyR.appendChild(fila);
                 }
             } else {
 
                 let fila = document.createElement('tr');
+                fila.id = "fila-rta2";
 
                 let rta = document.createElement('td');
+                rta.id = "rta2";
 
                 rta.textContent = "No hay datos";
                 rta.colSpan = 5;
@@ -211,7 +221,7 @@ function llenarTablaRespondidas() {
                 rta.style.textAlign = "center";
 
                 fila.appendChild(rta);
-                tbody.appendChild(fila);
+                tbodyR.appendChild(fila);
             }
 
 
@@ -221,8 +231,8 @@ function llenarTablaRespondidas() {
         });
 }
 
-function llenarTablaRechazadas() {
-    var tbody = document.getElementById('reclamos3')
+function llenarTablaReclamosRechazados() {
+    var tbodyRe = document.getElementById('reclamos3')
     fetch('http://localhost:8080/historialestados/filtro/3/3', {
         method: "GET",
         headers: {
@@ -239,6 +249,8 @@ function llenarTablaRechazadas() {
 
                 for (let i = 0; i < data.historial.length; i++) {
                     let fila = document.createElement('tr');
+                    fila.id = "fila-reclamos3"+i;
+
 
                     let titulo = document.createElement('td');
                     titulo.id = "reclamos-titulo3"
@@ -262,11 +274,14 @@ function llenarTablaRechazadas() {
 
 
 
-                    tbody.appendChild(fila);
+                    tbodyRe.appendChild(fila);
                 }
             } else {
                 let fila = document.createElement('tr');
+                fila.id = "fila-rta3";
+
                 let rta = document.createElement('td');
+                rta.id = "rta3";
 
                 rta.textContent = "No hay datos";
                 rta.colSpan = 5;
@@ -275,11 +290,8 @@ function llenarTablaRechazadas() {
                 rta.style.textAlign = "center";
 
                 fila.appendChild(rta);
-                tbody.appendChild(fila);
+                tbodyRe.appendChild(fila);
             }
-
-
-
 
         })
         .catch(error => {
@@ -287,7 +299,7 @@ function llenarTablaRechazadas() {
         });
 }
 
-function responderPeticion(id_historial) {
+function responderReclamo(id_historial) {
     //console.log(id_historial);
     fetch(`http://localhost:8080/historialestados/${id_historial}`, {
         method: "GET",
@@ -306,7 +318,7 @@ function responderPeticion(id_historial) {
             document.getElementById('desc').value = data.historialEstados.pqrs.descripcion;
 
 
-            var btn = document.getElementById('abtn');
+            let btn = document.getElementById('abtn');
 
             if (data.historialEstados.pqrs.anexo != "") {
 
@@ -316,7 +328,7 @@ function responderPeticion(id_historial) {
                 btn.style.display = 'none';
             }
 
-            var boton = document.getElementById('enviar');
+            let boton = document.getElementById('enviar');
             boton.onclick = function () {
                 actualizarInfoReclamos();
             };
@@ -332,14 +344,13 @@ var extImagen = "";
 function actualizarInfoReclamos() {
     const admin = localStorage.getItem('id_usuario');
     const respuesta = document.getElementById('resp').value;
-    const cal = document.getElementById('cal').value;
     const rad = document.getElementById('radicado').value;
 
     let imagen = base64;
 
     const data = {
         respuesta: respuesta,
-        calificacion: cal,
+        calificacion: 1,
         usuario: { id_usuario: parseInt(admin) },
         pqrs: { id_radicado: parseInt(rad) },
         anexo: imagen,
@@ -400,7 +411,7 @@ input.addEventListener("change", function () {
 });
 
 
-function verRespuestaModal(id_historial, id_radicado) {
+function verRespuestaReclamosModal(id_historial, id_radicado) {
     fetch(`http://localhost:8080/historialestados/${id_historial}`, {
         method: "GET",
         headers: {
@@ -442,7 +453,7 @@ function verRespuestaModal(id_historial, id_radicado) {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(id_radicado)
+            console.log(data)
             document.getElementById('resp1').value = data.respuesta.respuesta;
             document.getElementById('cal1').value = data.respuesta.calificacion;
 
@@ -465,8 +476,8 @@ function verRespuestaModal(id_historial, id_radicado) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    llenarTablaPendiente();
-    llenarTablaRespondidas();
-    llenarTablaRechazadas();
+    llenarTablaReclamosPendientes();
+    llenarTablaReclamosRespondidos();
+    llenarTablaReclamosRechazados();
 });
 
