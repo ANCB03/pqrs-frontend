@@ -227,31 +227,53 @@ const recientesRadicados = () => {
     })
         .then((response) => response.json())
         .then((data) => {
+            console.log("ANDERSON")
 
             console.log(data)
             let notificaciones = document.getElementById("pqrs");
 
-            for (let i = 0; i < 5; i++) {
+            if (data.error != null) {
                 let noti = document.createElement("a");
                 noti.classList.add('dropdown-item');
                 noti.classList.add('d-flex');
                 noti.classList.add('align-items-center');
 
                 noti.innerHTML = `<div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
+                                            <div class="icon-circle bg-primary">
+                                                <i class="fas fa-file-alt text-white"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">Hace algunas horas</div>
-                                        <span class="font-weight-bold">${data.pqrs[i].titulo}</span>
-                                    </div>
-                                    <div class="ml-3">
-                                        <span class="font-weight-bold">${data.pqrs[i].tipo.nombre}</span>
-                                    </div>`
+                                        <div>
+                                            <span class="font-weight-bold">No hay notificaciones</span>
+                                        </div>`
 
                 notificaciones.appendChild(noti);
+
+            } else {
+                for (let i = 0; i < 5; i++) {
+                    let noti = document.createElement("a");
+                    noti.classList.add('dropdown-item');
+                    noti.classList.add('d-flex');
+                    noti.classList.add('align-items-center');
+
+                    noti.innerHTML = `<div class="mr-3">
+                                            <div class="icon-circle bg-primary">
+                                                <i class="fas fa-file-alt text-white"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="small text-gray-500">Hace algunas horas</div>
+                                            <span class="font-weight-bold">${data.pqrs[i].titulo}</span>
+                                        </div>
+                                        <div class="ml-3">
+                                            <span class="font-weight-bold">${data.pqrs[i].tipo.nombre}</span>
+                                        </div>`
+
+                    notificaciones.appendChild(noti);
+                }
             }
+
+
         })
 }
 
