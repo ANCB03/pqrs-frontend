@@ -146,7 +146,7 @@ function llenarTablaRechazadas(){
             boton.setAttribute('data-bs-toggle', 'modal');
             boton.setAttribute('data-bs-target', '#editarInfoModal');
             boton.onclick = function () {
-                verRespuestaModal2();
+                verRespuestaModal();
             };
 
             accionColumna.appendChild(boton);
