@@ -130,6 +130,7 @@
                                 <th>Respuesta</th>
                                 <th>Calificacion</th>
                                 <th>Anexo</th>
+                                <th>Dar Calificación</th>
                             </tr>
                         </thead>
                         <tbody id="filas">
@@ -140,6 +141,47 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal editar-->
+    <div class="modal fade" id="darCalificacionModal" tabindex="-1" aria-labelledby="darCalificacionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="editarInfoModalLabel">Dar calificación</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label for="cod" class="form-label">Id respuesta</label>
+                        <input class="form-control" readonly type="text"  id="idres">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="cod" class="form-label">Respuesta</label>
+                        <input class="form-control" readonly type="text"  id="resp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="cod" class="form-label">Id radicado</label>
+                        <input class="form-control" readonly type="number"  id="idrad">
+                    </div>
+                    <div class="mb-3">
+                        <label for="cod" class="form-label">Id usuario</label>
+                        <input class="form-control" readonly type="number"  id="iduser">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nom" class="form-label">Calificación</label>
+                        <input class="form-control" type="number"  id="calif">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-dark" onclick="enviarCalificacion();">Guardar</button>
                 </div>
             </div>
         </div>

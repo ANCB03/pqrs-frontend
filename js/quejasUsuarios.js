@@ -33,7 +33,7 @@ function llenarTablaQuejasPendientes() {
 
                     let usuario = document.createElement('td');
                     usuario.id = "quejas-usuario1"
-                    usuario.textContent = data.historial[i].pqrs.usuario.nombre;
+                    usuario.textContent = data.historial[i].pqrs.usuario.id_usuario;
                     fila.appendChild(usuario);
 
                     let area = document.createElement('td');
@@ -179,7 +179,7 @@ function llenarTablaQuejasRespondidos() {
 
                     let usuario = document.createElement('td');
                     usuario.id = "quejas-usuario2"
-                    usuario.textContent = data.historial[i].pqrs.usuario.nombre;
+                    usuario.textContent = data.historial[i].pqrs.usuario.id_usuario;
                     fila.appendChild(usuario);
 
                     let area = document.createElement('td');
@@ -264,7 +264,7 @@ function llenarTablaQuejasRechazados() {
 
                     let usuario = document.createElement('td');
                     usuario.id = "quejas-usuario3"
-                    usuario.textContent = data.historial[i].pqrs.usuario.nombre;
+                    usuario.textContent = data.historial[i].pqrs.usuario.id_usuario;
                     fila.appendChild(usuario);
 
                     let area = document.createElement('td');
@@ -311,7 +311,7 @@ function responderQueja(id_historial) {
         .then(data => {
             console.log(data.historialEstados.pqrs.usuario.id_usuario)
             document.getElementById('radicado').value = data.historialEstados.pqrs.id_radicado;
-            document.getElementById('user').value = data.historialEstados.pqrs.usuario.nombre;
+            document.getElementById('user').value = data.historialEstados.pqrs.usuario.id_usuario;
             document.getElementById('area').value = data.historialEstados.pqrs.area.nombre;
             document.getElementById('prio').value = data.historialEstados.pqrs.prioridad.descripcion;
             document.getElementById('titulo').value = data.historialEstados.pqrs.titulo;
@@ -342,7 +342,7 @@ var base64 = "";
 var nombreImagen = "";
 var extImagen = "";
 function actualizarInfoQuejas() {
-    const admin = localStorage.getItem('id_usuario');
+    const admin = document.getElementById('user').value;
     const respuesta = document.getElementById('resp').value;
     const rad = document.getElementById('radicado').value;
 

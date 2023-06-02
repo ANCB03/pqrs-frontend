@@ -164,8 +164,93 @@ const cargarDataRespuestas = () => {
 
         fila.appendChild(anexo);
 
+        var accionColumna = document.createElement('td');
+            var boton = document.createElement('button');
+            boton.textContent = 'Calificar';
+            boton.className = 'btn btn-primary';
+            boton.setAttribute('data-bs-toggle', 'modal');
+            boton.setAttribute('data-bs-target', '#darCalificacionModal');
+            boton.onclick = function () {
+                darCalificación(respuestas[i].id_respuesta);
+            };
+
+            accionColumna.appendChild(boton);
+            fila.appendChild(accionColumna);
+
         tabla.appendChild(fila);
     }
+}
+
+function darCalificación(id_calificacion){
+    fetch(`http://localhost:8080/respuesta/${id_calificacion}`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            document.getElementById('idres').value = data.respuesta.id_respuesta;
+            document.getElementById('resp').value = data.respuesta.respuesta;
+            document.getElementById('idrad').value = data.respuesta.pqrs.id_radicado;
+            document.getElementById('iduser').value = data.respuesta.usuario.id_usuario;
+            document.getElementById('calif').value = data.respuesta.calificacion;
+
+        
+
+        }).catch(error => {
+            console.error('Error al obtener los datos:', error);
+        });
+}
+
+function enviarCalificacion(){
+    const cod = document.getElementById('idres').value;
+    const calif = document.getElementById('calif').value;
+    const rad = document.getElementById('idrad').value;
+    const idUser = document.getElementById('iduser').value;
+
+    const data = {
+        anexo: "",
+        calificacion: calif,
+        id_respuesta: cod,
+        pqrs: { id_radicado: rad },
+        respuesta: "",
+        usuario: {id_usuario: idUser}
+    }
+
+    let dataJSON = JSON.stringify(data);
+    console.log("data")
+    console.log(data);
+
+    console.log(token)
+
+    fetch("http://localhost:8080/respuesta/editar/" + cod, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: dataJSON,
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+
+            Swal.fire({
+                title: "Información",
+                text: data.message,
+                icon: "success",
+                confirmButtonText: "Aceptar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'mi-perfil.html'
+                }
+            })
+        })
+        .catch((error) => {
+            console.error("Error al intentar guardar:", error);
+        });
 }
 
 const limpiarTabla = () => {
