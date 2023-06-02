@@ -102,7 +102,7 @@ function actualizarInfo(id_usuario) {
         email: ema,
         telefono: tel,
         imagen: imagen,
-        rol: { id_rol: 2 },
+        rol: { id_rol: 1 },
     }
 
     let dataJSON = JSON.stringify(data);
