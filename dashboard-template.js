@@ -137,7 +137,11 @@ let sidebarTemplate = `
 
     <!-- Nav Item - Pages Collapse Menu -->
 
-
+    <li class="nav-item">
+        <a class="nav-link" href="fqa.html">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Gestión FQA </span></a>
+    </li>
 
 
     <hr class="sidebar-divider d-none d-md-block">
