@@ -1,4 +1,4 @@
-fetch('http://localhost:8080/fqa/all', {
+fetch('http://pqrs.us-east-1.elasticbeanstalk.com/fqa/all', {
     method: "GET",
     headers: {
         Authorization: `Bearer ${token}`
@@ -67,7 +67,7 @@ fetch('http://localhost:8080/fqa/all', {
 
 function abrirModalEditarFQA(id_fqa) {
 
-    fetch(`http://localhost:8080/fqa/${id_fqa}`, {
+    fetch(`http://pqrs.us-east-1.elasticbeanstalk.com/fqa/${id_fqa}`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
@@ -112,7 +112,7 @@ function actualizarFQA(id_fqa) {
 
     console.log(token)
 
-    fetch("http://localhost:8080/fqa/editar/" + idFQA, {
+    fetch("http://pqrs.us-east-1.elasticbeanstalk.com/fqa/editar/" + idFQA, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -152,7 +152,7 @@ const guardarFQA = () => {
 
     let fqaJSON = JSON.stringify(data);
 
-    fetch("http://localhost:8080/fqa/guardar", {
+    fetch("http://pqrs.us-east-1.elasticbeanstalk.com/fqa/guardar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

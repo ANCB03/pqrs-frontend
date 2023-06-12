@@ -1,7 +1,7 @@
 
 function llenarTablaPeticionesPendientes() {
     var tbodyP = document.getElementById('peticiones1')
-    fetch('http://localhost:8080/historialestados/filtro/2/1', {
+    fetch('http://pqrs.us-east-1.elasticbeanstalk.com/historialestados/filtro/2/1', {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
@@ -149,7 +149,7 @@ function llenarTablaPeticionesPendientes() {
 
 function llenarTablaPeticionesRespondidos() {
     var tbodyR = document.getElementById('peticiones2')
-    fetch('http://localhost:8080/historialestados/filtro/1/1', {
+    fetch('http://pqrs.us-east-1.elasticbeanstalk.com/historialestados/filtro/1/1', {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
@@ -233,7 +233,7 @@ function llenarTablaPeticionesRespondidos() {
 
 function llenarTablaPeticionesRechazados() {
     var tbodyRe = document.getElementById('peticiones3')
-    fetch('http://localhost:8080/historialestados/filtro/3/1', {
+    fetch('http://pqrs.us-east-1.elasticbeanstalk.com/historialestados/filtro/3/1', {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
@@ -301,7 +301,7 @@ function llenarTablaPeticionesRechazados() {
 
 function responderPeticion(id_historial) {
     //console.log(id_historial);
-    fetch(`http://localhost:8080/historialestados/${id_historial}`, {
+    fetch(`http://pqrs.us-east-1.elasticbeanstalk.com/historialestados/${id_historial}`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
@@ -363,7 +363,7 @@ function actualizarInfoPeticiones() {
 
     console.log(token)
 
-    fetch("http://localhost:8080/respuesta/guardar", {
+    fetch("http://pqrs.us-east-1.elasticbeanstalk.com/respuesta/guardar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -412,7 +412,7 @@ input.addEventListener("change", function () {
 
 
 function verRespuestaPeticionesModal(id_historial, id_radicado) {
-    fetch(`http://localhost:8080/historialestados/${id_historial}`, {
+    fetch(`http://pqrs.us-east-1.elasticbeanstalk.com/historialestados/${id_historial}`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
@@ -445,7 +445,7 @@ function verRespuestaPeticionesModal(id_historial, id_radicado) {
             console.error('Error al obtener los datos:', error);
         });
 
-    fetch(`http://localhost:8080/respuesta/radicado/${id_radicado}`, {
+    fetch(`http://pqrs.us-east-1.elasticbeanstalk.com/respuesta/radicado/${id_radicado}`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`

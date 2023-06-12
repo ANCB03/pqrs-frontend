@@ -2,7 +2,7 @@ var tbody = document.querySelector('tbody')
 var id_usuario = localStorage.getItem('id_usuario');
 
 
-fetch( `http://localhost:8080/usuario/${id_usuario}`, {
+fetch( `http://pqrs.us-east-1.elasticbeanstalk.com/usuario/${id_usuario}`, {
     method: "GET",
     headers: {
         Authorization: `Bearer ${token}`
@@ -57,7 +57,7 @@ fetch( `http://localhost:8080/usuario/${id_usuario}`, {
 
     function abrirModalEditarAdmin(idUsuario) {
 
-        fetch(`http://localhost:8080/usuario/${idUsuario}`, {
+        fetch(`http://pqrs.us-east-1.elasticbeanstalk.com/usuario/${idUsuario}`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -111,7 +111,7 @@ function actualizarInfo(id_usuario) {
 
     console.log(token)
 
-    fetch("http://localhost:8080/usuario/editar/" + id_usuario, {
+    fetch("http://pqrs.us-east-1.elasticbeanstalk.com/usuario/editar/" + id_usuario, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

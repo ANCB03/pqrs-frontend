@@ -1,7 +1,7 @@
 
 function llenarTablaSugerenciasPendientes() {
     var tbodyP = document.getElementById('sugerencias1')
-    fetch('http://localhost:8080/historialestados/filtro/2/4', {
+    fetch('http://pqrs.us-east-1.elasticbeanstalk.com/historialestados/filtro/2/4', {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
@@ -87,7 +87,7 @@ function llenarTablaSugerenciasPendientes() {
                             confirmButtonText: "Aceptar"
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                fetch("http://localhost:8080/historialestados/guardar", {
+                                fetch("http://pqrs.us-east-1.elasticbeanstalk.com/historialestados/guardar", {
                                     method: "POST",
                                     headers: {
                                         "Content-Type": "application/json",
@@ -149,7 +149,7 @@ function llenarTablaSugerenciasPendientes() {
 
 function llenarTablaSugerenciasRespondidos() {
     var tbodyR = document.getElementById('sugerencias2')
-    fetch('http://localhost:8080/historialestados/filtro/1/4', {
+    fetch('http://pqrs.us-east-1.elasticbeanstalk.com/historialestados/filtro/1/4', {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
@@ -233,7 +233,7 @@ function llenarTablaSugerenciasRespondidos() {
 
 function llenarTablaSugerenciasRechazados() {
     var tbodyRe = document.getElementById('sugerencias3')
-    fetch('http://localhost:8080/historialestados/filtro/3/4', {
+    fetch('http://pqrs.us-east-1.elasticbeanstalk.com/historialestados/filtro/3/4', {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
@@ -301,7 +301,7 @@ function llenarTablaSugerenciasRechazados() {
 
 function responderSugerencia(id_historial) {
     //console.log(id_historial);
-    fetch(`http://localhost:8080/historialestados/${id_historial}`, {
+    fetch(`http://pqrs.us-east-1.elasticbeanstalk.com/historialestados/${id_historial}`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
@@ -363,7 +363,7 @@ function actualizarInfoSugerencias() {
 
     console.log(token)
 
-    fetch("http://localhost:8080/respuesta/guardar", {
+    fetch("http://pqrs.us-east-1.elasticbeanstalk.com/respuesta/guardar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -412,7 +412,7 @@ input.addEventListener("change", function () {
 
 
 function verRespuestaSugerenciasModal(id_historial, id_radicado) {
-    fetch(`http://localhost:8080/historialestados/${id_historial}`, {
+    fetch(`http://pqrs.us-east-1.elasticbeanstalk.com/historialestados/${id_historial}`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
@@ -445,7 +445,7 @@ function verRespuestaSugerenciasModal(id_historial, id_radicado) {
             console.error('Error al obtener los datos:', error);
         });
 
-    fetch(`http://localhost:8080/respuesta/radicado/${id_radicado}`, {
+    fetch(`http://pqrs.us-east-1.elasticbeanstalk.com/respuesta/radicado/${id_radicado}`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`

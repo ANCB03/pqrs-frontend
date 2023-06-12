@@ -1,7 +1,7 @@
 
 var tbody = document.querySelector('tbody')
 
-fetch('http://localhost:8080/usuario/all', {
+fetch('http://pqrs.us-east-1.elasticbeanstalk.com/usuario/all', {
     method: "GET",
     headers: {
         Authorization: `Bearer ${token}`
@@ -63,7 +63,7 @@ function editar(id_usuario) {
 
 function abrirModalEditarUsuario(idUsuario) {
 
-    fetch(`http://localhost:8080/usuario/${idUsuario}`, {
+    fetch(`http://pqrs.us-east-1.elasticbeanstalk.com/usuario/${idUsuario}`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
@@ -117,7 +117,7 @@ function actualizarInfo(id_usuario) {
 
     console.log(token)
 
-    fetch("http://localhost:8080/usuario/editar/" + id_usuario, {
+    fetch("http://pqrs.us-east-1.elasticbeanstalk.com/usuario/editar/" + id_usuario, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

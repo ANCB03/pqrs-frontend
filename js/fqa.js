@@ -2,7 +2,7 @@
 let fqa = document.getElementById("fqa")
 
 const listarFQA = () => {
-    fetch("http://localhost:8080/fqa/all")
+    fetch("http://pqrs.us-east-1.elasticbeanstalk.com/fqa/all")
       .then((response) => response.json())
       .then((data) => {
 

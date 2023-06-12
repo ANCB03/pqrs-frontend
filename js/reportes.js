@@ -3,7 +3,7 @@
 //generar reporte se le pasa el id del tipo que quiera generar el filtro
 const generarReporte = (id_tipo) => {
 
-    fetch("http://localhost:8080/radicado/pdf/" + id_tipo, {
+    fetch("http://pqrs.us-east-1.elasticbeanstalk.com/radicado/pdf/" + id_tipo, {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
         responseType: 'arraybuffer'

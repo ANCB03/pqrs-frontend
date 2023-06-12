@@ -9,7 +9,7 @@ formeElement.addEventListener("submit", (event)=> {
     let login = {email:email.value, password:password.value};
     let loginJSON = JSON.stringify(login);
 
-        fetch(`http://localhost:8080/login`, {
+        fetch(`http://pqrs.us-east-1.elasticbeanstalk.com/login`, {
             method: "POST",
             body: loginJSON,
         })

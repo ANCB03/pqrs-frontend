@@ -14,7 +14,7 @@ const generarQueja = () => {
     console.log("data")
     console.log(data);
 
-    fetch("http://localhost:8080/queja/guardar", {
+    fetch("http://pqrs.us-east-1.elasticbeanstalk.com/queja/guardar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

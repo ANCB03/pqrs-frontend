@@ -28,7 +28,7 @@ formeElement.addEventListener("submit", (event) => {
   let registroJSON = JSON.stringify(registro);
   console.log(registroJSON);
 
-  fetch("http://localhost:8080/usuario/guardar", {
+  fetch("http://pqrs.us-east-1.elasticbeanstalk.com/usuario/guardar", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

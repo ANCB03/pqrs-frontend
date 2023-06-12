@@ -11,7 +11,7 @@ const miPerfil = () => {
 
 
     if (localStorage.getItem("email") != null) {
-        fetch("http://localhost:8080/usuario/encontrar/" + localStorage.getItem("email"), {
+        fetch("http://pqrs.us-east-1.elasticbeanstalk.com/usuario/encontrar/" + localStorage.getItem("email"), {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -78,7 +78,7 @@ const actualizarInfo = () => {
 
     console.log(token)
 
-    fetch("http://localhost:8080/usuario/editar/" + id_usuario, {
+    fetch("http://pqrs.us-east-1.elasticbeanstalk.com/usuario/editar/" + id_usuario, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -182,7 +182,7 @@ const cargarDataRespuestas = () => {
 }
 
 function darCalificación(id_calificacion){
-    fetch(`http://localhost:8080/respuesta/${id_calificacion}`, {
+    fetch(`http://pqrs.us-east-1.elasticbeanstalk.com/respuesta/${id_calificacion}`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
@@ -225,7 +225,7 @@ function enviarCalificacion(){
 
     console.log(token)
 
-    fetch("http://localhost:8080/respuesta/editar/" + cod, {
+    fetch("http://pqrs.us-east-1.elasticbeanstalk.com/respuesta/editar/" + cod, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

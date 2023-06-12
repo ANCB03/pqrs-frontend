@@ -192,7 +192,7 @@ const obtenerUsuarioLogueado = () => {
     console.log(email)
 
     if (email != null) {
-        fetch("http://localhost:8080/usuario/encontrar/" + email, {
+        fetch("http://pqrs.us-east-1.elasticbeanstalk.com/usuario/encontrar/" + email, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -220,7 +220,7 @@ const obtenerUsuarioLogueado = () => {
 
 
 const recientesRadicados = () => {
-    fetch("http://localhost:8080/radicado/recientes", {
+    fetch("http://pqrs.us-east-1.elasticbeanstalk.com/radicado/recientes", {
         headers: {
             Authorization: `Bearer ${token}`
         }
